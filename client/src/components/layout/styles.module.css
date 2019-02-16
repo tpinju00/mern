@@ -1,0 +1,36 @@
+.Container {
+  max-width: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  background-color: darkgray;
+}
+
+.ListGeneral {
+  justify-content: space-between;
+  align-items: center;
+  display: inline;
+}
+
+.NavLink {
+  display: inline-block;
+  padding: var(--header-padding, 5px) 10px;
+  margin-left: 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  border-top: 3px solid transparent;
+  border-bottom: 5px solid transparent;
+  transition: all 0.25s linear;
+  overflow-x: hidden;
+  text-decoration: none;
+}
+
+.NavLink_active,
+.NavLink:hover {
+  border-bottom: 5px solid gold;
+}
