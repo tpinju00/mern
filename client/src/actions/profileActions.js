@@ -28,6 +28,25 @@ export const getCurrentProfile = () => dispatch => {
     );
 };
 
+//get profile by status
+export const getProfileByStatus = status => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get(`/api/profile/all/status/${status}`)
+    .then(res =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: null
+      })
+    );
+};
+
 //get profile by handle
 export const getProfileByHandle = handle => dispatch => {
   dispatch(setProfileLoading());
