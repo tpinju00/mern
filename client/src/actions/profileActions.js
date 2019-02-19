@@ -29,16 +29,17 @@ export const getCurrentProfile = () => dispatch => {
 };
 
 //get profile by status
-export const getProfileByStatus = status => dispatch => {
+export const getProfileByStatus = (status, history) => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get(`/api/profile/all/status/${status}`)
-    .then(res =>
+    .get(`api/profile/all/status/${status}`)
+    .then(res => {
+      history.push(`/profiles`);
       dispatch({
         type: GET_PROFILE,
         payload: res.data
-      })
-    )
+      });
+    })
     .catch(err =>
       dispatch({
         type: GET_PROFILE,
