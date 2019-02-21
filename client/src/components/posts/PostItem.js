@@ -81,6 +81,7 @@ class PostItem extends Component {
                 ) : null}
               </span>
             ) : null}
+            <div className="handle">{post.handle}</div>
           </div>
         </div>
       </div>

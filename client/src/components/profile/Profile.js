@@ -7,6 +7,7 @@ import ProfileAbout from "./ProfileAbout";
 import ProfileCreds from "./ProfileCreds";
 import Spinner from "../common/Spinner";
 import { getProfileByHandle } from "../../actions/profileActions";
+import Posts from "../posts/Posts";
 
 class Profile extends Component {
   componentDidMount() {
@@ -40,6 +41,7 @@ class Profile extends Component {
               education={profile.education}
               experience={profile.experience}
             />
+            <Posts handle={profile.handle} />
           </div>
         </div>
       );

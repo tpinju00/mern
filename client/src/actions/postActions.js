@@ -14,7 +14,7 @@ import {
 export const addPost = postData => dispatch => {
   dispatch(clearErrors());
   axios
-    .post("/api/posts", postData)
+    .post(`/api/profile/${postData.handle}/posts`, postData)
     .then(res =>
       dispatch({
         type: ADD_POST,
@@ -30,10 +30,10 @@ export const addPost = postData => dispatch => {
 };
 
 // Get Posts
-export const getPosts = () => dispatch => {
+export const getPosts = handle => dispatch => {
   dispatch(setPostLoading());
   axios
-    .get("/api/posts")
+    .get(`/api/profile/${handle}/posts`)
     .then(res =>
       dispatch({
         type: GET_POSTS,

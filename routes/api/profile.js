@@ -7,6 +7,7 @@ const passport = require("passport");
 const validateProfileInput = require("../../validation/profile");
 const validateExperienceInput = require("../../validation/experience");
 const validateEducationInput = require("../../validation/education");
+const validatePostInput = require("../../validation/post");
 
 // Load Profile Model
 const Profile = require("../../models/Profile");
@@ -254,6 +255,42 @@ router.post(
     });
   }
 );
+
+// @route       POST api/profile/:handle/posts
+// @description Create post
+// @access      Private
+router.post(
+  "/:handle/posts",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validatePostInput(req.body);
+
+    // Check validation
+    if (!isValid) {
+      // If any errors send 400 with errors object
+      return res.status(400).json(errors);
+    }
+    const newPost = new Post({
+      text: req.body.text,
+      name: req.body.name,
+      picture: req.body.picture,
+      user: req.user.id,
+      handle: req.body.handle
+    });
+
+    newPost.save().then(post => res.json(post));
+  }
+);
+
+// @route       GET api/posts
+// @description Get post
+// @access      Public
+router.get("/:handle/posts/", (req, res) => {
+  Post.find({ handle: req.params.handle })
+    .sort({ date: -1 })
+    .then(posts => res.json(posts))
+    .catch(err => res.status({ nopostsfound: "No posts found for that user" }));
+});
 
 // @route       DELETE api/profile/experience/:exp_id
 // @description Delete experience from profile

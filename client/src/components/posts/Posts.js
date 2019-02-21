@@ -8,7 +8,8 @@ import PostFeed from "./PostFeed";
 
 class Posts extends Component {
   componentDidMount() {
-    this.props.getPosts();
+    this.props.getPosts(this.props.handle);
+    //console.log(this.props.handle);
   }
   render() {
     const { posts, loading } = this.props.post;
