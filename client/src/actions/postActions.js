@@ -86,9 +86,10 @@ export const deletePost = id => dispatch => {
 };
 
 // Add Like
-export const addLike = id => dispatch => {
+export const addLike = payload => dispatch => {
+  const { id, ratingNumber, handle } = payload;
   axios
-    .post(`/api/posts/like/${id}`)
+    .post(`/api/posts/${handle}/like/${id}`, { ratingNumber })
     .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({

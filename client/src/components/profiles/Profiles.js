@@ -25,7 +25,9 @@ class Profiles extends Component {
   }
 
   componentDidMount() {
-    this.props.getProfiles();
+    if (!this.props.skipMounting) {
+      this.props.getProfiles();
+    }
   }
 
   componentWillReceiveProps(nextProps) {

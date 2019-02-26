@@ -5,6 +5,7 @@ import PostForm from "./PostForm";
 import Spinner from "../common/Spinner";
 import { getPosts } from "../../actions/postActions";
 import PostFeed from "./PostFeed";
+import PostItem from "./PostItem";
 
 class Posts extends Component {
   componentDidMount() {
@@ -13,13 +14,12 @@ class Posts extends Component {
   }
   render() {
     const { posts, loading } = this.props.post;
-
     let postContent;
 
     if (posts === null || loading) {
       postContent = <Spinner />;
     } else {
-      postContent = <PostFeed posts={posts} />;
+      postContent = <PostFeed posts={posts} handle={this.props.handle} />;
     }
 
     return (

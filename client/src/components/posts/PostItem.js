@@ -10,8 +10,9 @@ class PostItem extends Component {
     this.props.deletePost(id);
   }
 
-  onLikeClick(id) {
-    this.props.addLike(id);
+  onLikeClick(id, ratingNumber) {
+    const handle = this.props.handle;
+    this.props.addLike({ id, ratingNumber, handle });
   }
 
   onUnlikeClick(id) {
@@ -49,7 +50,9 @@ class PostItem extends Component {
             {showActions ? (
               <span>
                 <button
-                  onClick={this.onLikeClick.bind(this, post._id)}
+                  onClick={() =>
+                    this.onLikeClick({ id: post._id, ratingNumber: 1 })
+                  }
                   type="button"
                   className="btn btn-light mr-1"
                 >
@@ -58,7 +61,73 @@ class PostItem extends Component {
                       "text-info": this.findUserLike(post.likes)
                     })}
                   />
-                  <span className="badge badge-light">{post.likes.length}</span>
+                  <span className="badge badge-light">
+                    {post.likes.ratingNumber}
+                  </span>
+                </button>
+                <button
+                  onClick={() =>
+                    this.onLikeClick({ id: post._id, ratingNumber: 2 })
+                  }
+                  type="button"
+                  className="btn btn-light mr-1"
+                >
+                  <i
+                    className={classnames("fas fa-thumbs-up", {
+                      "text-info": this.findUserLike(post.likes)
+                    })}
+                  />
+                  <span className="badge badge-light">
+                    {post.likes.ratingNumber}
+                  </span>
+                </button>
+                <button
+                  onClick={() =>
+                    this.onLikeClick({ id: post._id, ratingNumber: 3 })
+                  }
+                  type="button"
+                  className="btn btn-light mr-1"
+                >
+                  <i
+                    className={classnames("fas fa-thumbs-up", {
+                      "text-info": this.findUserLike(post.likes)
+                    })}
+                  />
+                  <span className="badge badge-light">
+                    {post.likes.ratingNumber}
+                  </span>
+                </button>
+                <button
+                  onClick={() =>
+                    this.onLikeClick({ id: post._id, ratingNumber: 4 })
+                  }
+                  type="button"
+                  className="btn btn-light mr-1"
+                >
+                  <i
+                    className={classnames("fas fa-thumbs-up", {
+                      "text-info": this.findUserLike(post.likes)
+                    })}
+                  />
+                  <span className="badge badge-light">
+                    {post.likes.ratingNumber}
+                  </span>
+                </button>
+                <button
+                  onClick={() =>
+                    this.onLikeClick({ id: post._id, ratingNumber: 5 })
+                  }
+                  type="button"
+                  className="btn btn-light mr-1"
+                >
+                  <i
+                    className={classnames("fas fa-thumbs-up", {
+                      "text-info": this.findUserLike(post.likes)
+                    })}
+                  />
+                  <span className="badge badge-light">
+                    {post.likes.ratingNumber}
+                  </span>
                 </button>
                 <button
                   onClick={this.onUnlikeClick.bind(this, post._id)}

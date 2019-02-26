@@ -34,7 +34,7 @@ class Landing extends Component {
                 <Link to="/login" className={styles.NavLink}>
                   Login
                 </Link>
-                <Profiles status={this.state.status} />
+                <Profiles status={this.state.status} skipMounting />
               </div>
             </div>
           </div>

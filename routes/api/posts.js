@@ -100,7 +100,7 @@ router.delete(
 // @description Like post
 // @access      Private
 router.post(
-  "/profile/:handle/like/:id",
+  "/like/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Profile.findOne({ user: req.user.id }).then(profile => {
@@ -115,8 +115,10 @@ router.post(
               .json({ alreadyliked: "User already liked this post" });
           }
 
-          // Add user id to likes array
-          post.likes.unshift({ user: req.user.id });
+          post.likes.unshift(
+            { user: req.user.id },
+            { ratingNumber: req.body.ratingNumber }
+          );
 
           post.save().then(post => res.json(post));
         })
