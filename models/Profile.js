@@ -11,6 +11,14 @@ const ProfileSchema = new Schema({
     required: true,
     max: 40
   },
+  status: {
+    type: String,
+    required: true
+  },
+  level: {
+    type: String,
+    required: true
+  },
   company: {
     type: String
   },
@@ -19,10 +27,6 @@ const ProfileSchema = new Schema({
   },
   location: {
     type: String
-  },
-  status: {
-    type: String,
-    required: true
   },
   skills: {
     type: [String],
@@ -34,6 +38,20 @@ const ProfileSchema = new Schema({
   githubusername: {
     type: String
   },
+  totalRating: {
+    type: Number
+  },
+  ratings: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "users"
+      },
+      ratingNumber: {
+        type: Number
+      }
+    }
+  ],
   experience: [
     {
       title: {

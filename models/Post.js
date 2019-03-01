@@ -20,17 +20,11 @@ const PostSchema = new Schema({
   handle: {
     type: String
   },
-
   likes: [
     {
       user: {
         type: Schema.Types.ObjectId,
         ref: "users"
-      },
-      handle: {
-        type: String,
-        required: true,
-        max: 40
       },
       ratingNumber: {
         type: Number

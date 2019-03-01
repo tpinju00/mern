@@ -147,6 +147,7 @@ router.post(
     if (req.body.location) profileFields.location = req.body.location;
     if (req.body.bio) profileFields.bio = req.body.bio;
     if (req.body.status) profileFields.status = req.body.status;
+    if (req.body.level) profileFields.level = req.body.level;
     if (req.body.githubusername)
       profileFields.githubusername = req.body.githubusername;
 
@@ -184,6 +185,40 @@ router.post(
           new Profile(profileFields).save().then(profile => res.json(profile));
         });
       }
+    });
+  }
+);
+
+// @route       POST api/posts/rating/:id
+// @description Add rating
+// @access      Private
+router.post(
+  "/rating/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Profile.findById(req.params.id)
+        .then(profile => {
+          if (
+            profile.ratings.filter(
+              rating => rating.user.toString() === req.user.id
+            ).length > 0
+          ) {
+            return res
+              .status(400)
+              .json({ alreadyrated: "User already rated this profile" });
+          }
+
+          profile.ratings.unshift(
+            { user: req.user.id },
+            { ratingNumber: req.body.ratingNumber }
+          );
+
+          profile.save().then(profile => res.json(profile));
+        })
+        .catch(err =>
+          res.status(404).json({ profilenotfound: "No profile found" })
+        );
     });
   }
 );
@@ -277,6 +312,7 @@ router.post(
       user: req.user.id,
       handle: req.body.handle
     });
+    console.log("postjeNAPRAVLJEN");
 
     newPost.save().then(post => res.json(post));
   }
@@ -300,7 +336,9 @@ router.post(
               .status(400)
               .json({ alreadyliked: "User already liked this post" });
           }
-          console.log(req.body.ratingNumber);
+          console.log("params", req.params);
+          console.log("body", req.body);
+          //console.log(req.body.ratingNumber);
           post.likes.unshift(
             { user: req.user.id },
             { ratingNumber: req.body.ratingNumber }

@@ -17,6 +17,7 @@ class Profiles extends Component {
     this.state = {
       status: "",
       filteredByStatus: [],
+      filteredByLevel: [],
       errors: {}
     };
 
@@ -60,7 +61,7 @@ class Profiles extends Component {
     console.log(profiles);
 
     if (isEmpty(profiles) || loading) {
-      profileStatusItems = <Spinner />;
+      //profileStatusItems = <Spinner />;
     } else {
       if (!isEmpty(profiles) && isEmpty(filteredByStatus)) {
         profileItems = profiles.map(profile => (
@@ -71,16 +72,31 @@ class Profiles extends Component {
           <ProfileItem key={profile._id} profile={profile} />
         ));
       } else {
-        profileItems = <h4>No profiles found...</h4>;
+        profileItems = profiles.map(profile => (
+          <ProfileItem key={profile._id} profile={profile} />
+        ));
       }
     }
 
     const options = [
       { label: "* Select Professional Status", value: 0 },
       { label: "Developer", value: "Developer" },
-      { label: "Junior Developer", value: "Junior Developer" },
+      { label: "Student", value: "Student" },
       { label: "Senior Developer", value: "Senior Developer" },
       { label: "Manager", value: "Manager" },
+      { label: "Student or Learning", value: "Student or Learning" },
+      { label: "Instructor or Teacher", value: "Instructor or Teacher" },
+      { label: "Intern", value: "Intern" },
+      { label: "Other", value: "Other" }
+    ];
+
+    // Select options for level
+    const optionsLevel = [
+      { label: "* Odaberi svoj nivo podučavanja", value: 0 },
+      { label: "Predškolski", value: "Predškolski" },
+      { label: "Osnovnoškolski", value: "Osnovnoškolski" },
+      { label: "Srednjoškolski", value: "Srednjoškolski" },
+      { label: "Fakultetski", value: "Fakultetski" },
       { label: "Student or Learning", value: "Student or Learning" },
       { label: "Instructor or Teacher", value: "Instructor or Teacher" },
       { label: "Intern", value: "Intern" },
@@ -104,6 +120,15 @@ class Profiles extends Component {
                   onChange={this.onChange}
                   options={options}
                   error={errors.status}
+                  info="Give us an idea of where you are at in your career"
+                />
+                <SelectListGroup
+                  placeholder="Level"
+                  name="level"
+                  value={this.state.level}
+                  onChange={this.onChange}
+                  options={optionsLevel}
+                  error={errors.level}
                   info="Give us an idea of where you are at in your career"
                 />
                 <input

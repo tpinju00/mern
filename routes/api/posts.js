@@ -96,7 +96,7 @@ router.delete(
   }
 );
 
-// @route       POST api/posts/like/:id
+// @route       POST api/posts/like/:id OR /profile/:handle/like/:id
 // @description Like post
 // @access      Private
 router.post(
@@ -162,21 +162,21 @@ router.post(
   }
 );
 
-// @route       POST api/posts/comment/:id
+// @route       POST api/posts/comment/:id OR /profile/:handle
 // @description Add comment to post
 // @access      Private
 router.post(
-  "/profile/:handle/comment/:id",
+  "/comment/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validatePostInput(req.body);
-
+    console.log("blblal");
     // Check validation
     if (!isValid) {
       // If any errors send 400 with errors object
       return res.status(400).json(errors);
     }
-
+    console.log(req.params.id);
     Post.findById(req.params.id)
       .then(post => {
         const newComment = {
@@ -188,6 +188,7 @@ router.post(
         };
 
         // add to comments array
+        console.log(newComment);
         post.comments.unshift(newComment);
 
         // save

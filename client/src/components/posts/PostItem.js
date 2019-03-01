@@ -10,7 +10,7 @@ class PostItem extends Component {
     this.props.deletePost(id);
   }
 
-  onLikeClick(id, ratingNumber) {
+  onLikeClick({ id, ratingNumber }) {
     const handle = this.props.handle;
     this.props.addLike({ id, ratingNumber, handle });
   }
@@ -38,7 +38,7 @@ class PostItem extends Component {
             <a href="profile.html">
               <img
                 className="rounded-circle d-none d-md-block"
-                src={post.picture}
+                //src={post.picture}
                 alt=""
               />
             </a>

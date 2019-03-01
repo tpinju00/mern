@@ -15,10 +15,11 @@ class CreateProfile extends Component {
     this.state = {
       displaySocialInputs: false,
       handle: "",
+      status: "",
+      level: "",
       company: "",
       website: "",
       location: "",
-      status: "",
       skills: "",
       githubusername: "",
       bio: "",
@@ -81,6 +82,7 @@ class CreateProfile extends Component {
         website: profile.website,
         location: profile.location,
         status: profile.status,
+        level: profile.level,
         skills: skillsCSV,
         githubusername: profile.githubusername,
         bio: profile.bio,
@@ -102,6 +104,7 @@ class CreateProfile extends Component {
       website: this.state.website,
       location: this.state.location,
       status: this.state.status,
+      level: this.state.level,
       skills: this.state.skills,
       githubusername: this.state.githubusername,
       bio: this.state.bio,
@@ -179,7 +182,7 @@ class CreateProfile extends Component {
     const options = [
       { label: "* Select Professional Status", value: 0 },
       { label: "Developer", value: "Developer" },
-      { label: "Junior Developer", value: "Junior Developer" },
+      { label: "Student", value: "Student" },
       { label: "Senior Developer", value: "Senior Developer" },
       { label: "Manager", value: "Manager" },
       { label: "Student or Learning", value: "Student or Learning" },
@@ -188,6 +191,18 @@ class CreateProfile extends Component {
       { label: "Other", value: "Other" }
     ];
 
+    // Select options for level
+    const optionsLevel = [
+      { label: "* Odaberi svoj nivo podučavanja", value: 0 },
+      { label: "Predškolski", value: "Predškolski" },
+      { label: "Osnovnoškolski", value: "Osnovnoškolski" },
+      { label: "Srednjoškolski", value: "Srednjoškolski" },
+      { label: "Fakultetski", value: "Fakultetski" },
+      { label: "Student or Learning", value: "Student or Learning" },
+      { label: "Instructor or Teacher", value: "Instructor or Teacher" },
+      { label: "Intern", value: "Intern" },
+      { label: "Other", value: "Other" }
+    ];
     return (
       <div className="create-profile">
         <div className="container">
@@ -214,6 +229,15 @@ class CreateProfile extends Component {
                   onChange={this.onChange}
                   options={options}
                   error={errors.status}
+                  info="Give us an idea of where you are at in your career"
+                />
+                <SelectListGroup
+                  placeholder="Level"
+                  name="level"
+                  value={this.state.level}
+                  onChange={this.onChange}
+                  options={optionsLevel}
+                  error={errors.level}
                   info="Give us an idea of where you are at in your career"
                 />
                 <TextFieldGroup

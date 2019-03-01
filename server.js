@@ -8,7 +8,19 @@ const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
 const posts = require("./routes/api/posts");
 
+//img upload
+const path = require("path");
+const crypto = require("crypto");
+const multer = require("multer");
+const GridFsStorage = require("multer-gridfs-storage");
+const Grid = require("gridfs-stream");
+const methodOverride = require("method-override");
+
 const app = express();
+
+// img upload
+app.use(methodOverride("_method"));
+app.set("view engine", "ejs");
 
 //Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));

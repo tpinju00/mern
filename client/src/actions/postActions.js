@@ -7,7 +7,8 @@ import {
   GET_POSTS,
   GET_POST,
   POST_LOADING,
-  DELETE_POST
+  DELETE_POST,
+  ADD_RATING
 } from "./types";
 
 // Add Post
@@ -26,6 +27,30 @@ export const addPost = postData => dispatch => {
         type: GET_ERRORS,
         payload: err.response.data
       })
+    );
+};
+
+// Add rating
+export const addRating = payload => dispatch => {
+  const { id, ratingNumber, handle } = payload;
+  //console.log(payload);
+  axios
+    .post(`/api/profile/rating/${id}`, { ratingNumber })
+    .then(
+      res =>
+        dispatch({
+          type: ADD_RATING,
+          payload: res.data
+        }),
+      console.log(payload)
+    )
+    .catch(
+      err =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        }),
+      console.log(payload)
     );
 };
 
@@ -88,8 +113,9 @@ export const deletePost = id => dispatch => {
 // Add Like
 export const addLike = payload => dispatch => {
   const { id, ratingNumber, handle } = payload;
+  //console.log(payload);
   axios
-    .post(`/api/posts/${handle}/like/${id}`, { ratingNumber })
+    .post(`/api/posts/like/${id}`, { ratingNumber })
     .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({
