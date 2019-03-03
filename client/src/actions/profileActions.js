@@ -1,4 +1,5 @@
 import axios from "axios";
+import queryString from "query-string";
 
 import {
   GET_PROFILE,
@@ -28,13 +29,59 @@ export const getCurrentProfile = () => dispatch => {
     );
 };
 
+//Get all profiles
+export const getProfiles = () => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get("/api/profile/all")
+    .then(res =>
+      dispatch(
+        {
+          type: GET_PROFILES,
+          payload: res.data
+        },
+        console.log("glupsi:", res.data)
+      )
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILES,
+        payload: null
+      })
+    );
+};
+
+//get profile by level
+export const getProfileByLevel = (level, history) => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get(`api/profile/all/level/${level}`)
+    .then(res => {
+      history.push(`/profiles`);
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: null
+      })
+    );
+};
+
 //get profile by status
-export const getProfileByStatus = (status, history) => dispatch => {
+export const getProfileByStatus = (status, level, history) => dispatch => {
+  if (level && status) {
+    console.log("level je:", level);
+  }
   dispatch(setProfileLoading());
   axios
     .get(`api/profile/all/status/${status}`)
     .then(res => {
-      history.push(`/profiles`);
+      //I need a Dinamic Url here for multiple choices, not just status and then many status options, but the "status=" part should be
+      history.push(`/profiles?` + "status=" + `${status}`);
       dispatch({
         type: GET_PROFILE,
         payload: res.data
@@ -138,25 +185,6 @@ export const deleteEducation = id => dispatch => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
-      })
-    );
-};
-
-//Get all profiles
-export const getProfiles = () => dispatch => {
-  dispatch(setProfileLoading());
-  axios
-    .get("/api/profile/all")
-    .then(res =>
-      dispatch({
-        type: GET_PROFILES,
-        payload: res.data
-      })
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_PROFILES,
-        payload: null
       })
     );
 };

@@ -5,16 +5,21 @@ import PropTypes from "prop-types";
 import Spinner from "../common/Spinner";
 import { getProfiles } from "../../actions/profileActions";
 import ProfileItem from "./ProfileItem";
-import { getProfileByStatus } from "../../actions/profileActions";
+import {
+  getProfileByStatus,
+  getProfileByLevel
+} from "../../actions/profileActions";
 import SelectListGroup from "../common/SelectListGroup";
 import isEmpty from "../../validation/is-empty";
 import { withRouter } from "react-router-dom";
+import queryString from "query-string";
 
 class Profiles extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      level: "",
       status: "",
       filteredByStatus: [],
       filteredByLevel: [],
@@ -27,6 +32,10 @@ class Profiles extends Component {
 
   componentDidMount() {
     if (!this.props.skipMounting) {
+      //Test
+      const values = queryString.parse(this.props.location.search);
+      console.log(values.status);
+      // ENd test
       this.props.getProfiles();
     }
   }
@@ -43,7 +52,11 @@ class Profiles extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    this.props.getProfileByStatus(this.state.status, this.props.history);
+    this.props.getProfileByStatus(
+      this.state.status,
+      this.state.level,
+      this.props.history
+    );
   }
 
   onChange(e) {
@@ -55,20 +68,24 @@ class Profiles extends Component {
     let profileItems;
 
     const { errors } = this.state;
-    const { filteredByStatus } = this.state;
+    const { filteredByStatus, filteredByLevel } = this.state;
     let profileStatusItems;
+    let profileLevelItems;
 
     console.log(profiles);
 
     if (isEmpty(profiles) || loading) {
       //profileStatusItems = <Spinner />;
     } else {
-      if (!isEmpty(profiles) && isEmpty(filteredByStatus)) {
+      if (!isEmpty(profiles) && isEmpty(filteredByStatus || filteredByLevel)) {
         profileItems = profiles.map(profile => (
           <ProfileItem key={profile._id} profile={profile} />
         ));
-      } else if (filteredByStatus.length > 0) {
+      } else if (filteredByStatus.length > 0 || filteredByLevel.length > 0) {
         profileStatusItems = filteredByStatus.map(profile => (
+          <ProfileItem key={profile._id} profile={profile} />
+        ));
+        profileLevelItems = filteredByLevel.map(profile => (
           <ProfileItem key={profile._id} profile={profile} />
         ));
       } else {
@@ -137,7 +154,10 @@ class Profiles extends Component {
                   className="btn btn-info btn-block mt-4"
                 />
 
-                <div>{profileStatusItems}</div>
+                <div>
+                  {profileStatusItems}
+                  {profileLevelItems}
+                </div>
               </form>
               {profileItems}
             </div>
@@ -151,6 +171,7 @@ class Profiles extends Component {
 Profiles.propTypes = {
   getProfiles: PropTypes.func.isRequired,
   getProfileByStatus: PropTypes.func.isRequired,
+  getProfileByLevel: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
 
@@ -160,5 +181,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getProfiles, getProfileByStatus }
+  { getProfiles, getProfileByStatus, getProfileByLevel }
 )(withRouter(Profiles));

@@ -46,6 +46,8 @@ router.get(
 // @access      Public
 router.get("/all", (req, res) => {
   const errors = {};
+  console.log("query is giving me:", req.query);
+  //console.log("res je:", res);
 
   Profile.find()
     .populate("user", ["name", "picture"])
@@ -83,10 +85,27 @@ router.get("/all/status/:status", (req, res) => {
     );
 });
 
+// @route       GET api/profile/level/:level
+// @description Get profile by level
+// @access      Public
+router.get("/level/:level", (req, res) => {
+  const errors = {};
+
+  Profile.findOne({ level: req.params.level })
+    .populate("user", ["name", "picture"])
+    .then(profile => {
+      if (!profile) {
+        errors.noprofile = "There is not profile for this user";
+        res.status(404).json(errors);
+      }
+      res.json(profile);
+    })
+    .catch(err => res.status(404).json(err));
+});
+
 // @route       GET api/profile/handle/:handle
 // @description Get profile by handle
 // @access      Public
-
 router.get("/handle/:handle", (req, res) => {
   const errors = {};
 

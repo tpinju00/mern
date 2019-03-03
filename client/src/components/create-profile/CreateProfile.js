@@ -18,6 +18,7 @@ class CreateProfile extends Component {
       website: "",
       location: "",
       status: "",
+      level: "",
       skills: "",
       githubusername: "",
       bio: "",
@@ -48,6 +49,7 @@ class CreateProfile extends Component {
       website: this.state.website,
       location: this.state.location,
       status: this.state.status,
+      level: this.state.level,
       skills: this.state.skills,
       githubusername: this.state.githubusername,
       bio: this.state.bio,
@@ -134,6 +136,18 @@ class CreateProfile extends Component {
       { label: "Other", value: "Other" }
     ];
 
+    const optionsLevel = [
+      { label: "* Odaberi svoj nivo podučavanja", value: 0 },
+      { label: "Predškolski", value: "Predškolski" },
+      { label: "Osnovnoškolski", value: "Osnovnoškolski" },
+      { label: "Srednjoškolski", value: "Srednjoškolski" },
+      { label: "Fakultetski", value: "Fakultetski" },
+      { label: "Student or Learning", value: "Student or Learning" },
+      { label: "Instructor or Teacher", value: "Instructor or Teacher" },
+      { label: "Intern", value: "Intern" },
+      { label: "Other", value: "Other" }
+    ];
+
     return (
       <div className="create-profile">
         <div className="container">
@@ -160,6 +174,15 @@ class CreateProfile extends Component {
                   onChange={this.onChange}
                   options={options}
                   error={errors.status}
+                  info="Give us an idea of where you are at in your career"
+                />
+                <SelectListGroup
+                  placeholder="Level"
+                  name="level"
+                  value={this.state.level}
+                  onChange={this.onChange}
+                  options={optionsLevel}
+                  error={errors.level}
                   info="Give us an idea of where you are at in your career"
                 />
                 <TextFieldGroup
