@@ -30,10 +30,15 @@ export const getCurrentProfile = () => dispatch => {
 };
 
 //Get all profiles
-export const getProfiles = () => dispatch => {
+// @param - filters - Object - Object with all filters inside. EG:
+// {
+//   skills: "CSS",
+//   status:"Developer"
+// }
+export const getProfiles = filters => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get("/api/profile/all")
+    .get("/api/profile/all", { params: filters })
     .then(res =>
       dispatch(
         {

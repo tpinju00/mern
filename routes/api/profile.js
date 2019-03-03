@@ -49,14 +49,26 @@ router.get("/all", (req, res) => {
   console.log("query is giving me:", req.query);
   //console.log("res je:", res);
 
-  Profile.find()
-    .populate("user", ["name", "picture"])
+  //Object of all query parameters
+  const queries = req.query;
+
+  //Save the query into a constant variable, so we can filter through it
+  const search = Profile.find().populate("user", ["name", "picture"]);
+
+  //Loop through all keys of the object
+  Object.keys(queries).forEach(key => {
+    // Apply a filter to the search for each key-value pair of the query Object
+    // This alters the search variable
+    search.where(key, queries[key]);
+  });
+
+  //Return the final result, or a error
+  search
     .then(profiles => {
       if (!profiles) {
         errors.noprofile = "There are no profiles for this user";
         return res.status(404).json(errors);
       }
-
       res.json(profiles);
     })
     .catch(err =>

@@ -32,11 +32,13 @@ class Profiles extends Component {
 
   componentDidMount() {
     if (!this.props.skipMounting) {
-      //Test
-      const values = queryString.parse(this.props.location.search);
-      console.log(values.status);
-      // ENd test
-      this.props.getProfiles();
+      // //Test
+      // const values = queryString.parse(this.props.location.search);
+      // console.log(values.status);
+      // // ENd test
+      if (!this.props.history.location.state.redirect == "submit") {
+        this.props.getProfiles();
+      }
     }
   }
 
@@ -52,11 +54,19 @@ class Profiles extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    this.props.getProfileByStatus(
-      this.state.status,
-      this.state.level,
-      this.props.history
-    );
+    const filters = {};
+
+    if (this.state.status !== "") {
+      filters.status = this.state.status;
+    }
+    if (this.state.level !== "") {
+      filters.level = this.state.level;
+    }
+
+    this.props.getProfiles(filters);
+
+    //redirect to /profiles
+    this.props.history.push("/profiles", { redirect: "submit" });
   }
 
   onChange(e) {
@@ -159,7 +169,8 @@ class Profiles extends Component {
                   {profileLevelItems}
                 </div>
               </form>
-              {profileItems}
+              {this.props.history.location.pathname === "/profiles" &&
+                profileItems}
             </div>
           </div>
         </div>
