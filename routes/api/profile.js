@@ -227,9 +227,10 @@ router.post(
   "/rating/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      Profile.findById(req.params.id)
+    console.log("xxxxxxxxxxxxxx",req.body.profileUserId);
+      Profile.findById(req.body.profileId)
         .then(profile => {
+          console.log(profile.ratings);
           if (
             profile.ratings.filter(
               rating => rating.user.toString() === req.user.id
@@ -239,7 +240,7 @@ router.post(
               .status(400)
               .json({ alreadyrated: "User already rated this profile" });
           }
-
+          //console.log("jukica:",req.body.profileId);
           profile.ratings.unshift(
             { user: req.user.id },
             { ratingNumber: req.body.ratingNumber }
@@ -247,10 +248,11 @@ router.post(
 
           profile.save().then(profile => res.json(profile));
         })
-        .catch(err =>
+        .catch(err => {
           res.status(404).json({ profilenotfound: "No profile found" })
+        }
+
         );
-    });
   }
 );
 

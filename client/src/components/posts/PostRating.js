@@ -10,9 +10,9 @@ class PostRating extends Component {
     this.props.deletePost(id);
   }
 
-  onLikeClick({ id, ratingNumber }) {
+  onLikeClick({ id, profileId, profileUserId, ratingNumber }) {
     const handle = this.props.handle;
-    this.props.addRating({ id, ratingNumber, handle });
+    this.props.addRating({ id, profileId, profileUserId, ratingNumber, handle });
   }
 
   onUnlikeClick(id) {
@@ -30,10 +30,13 @@ class PostRating extends Component {
   render() {
     const { post, auth, showActions } = this.props;
     const { profile } = this.props.profile;
+    console.log(auth.user.id);
+    console.log("toams", profile.user._id);
+
     return (
       <div>
         <button
-          onClick={() => this.onLikeClick({ id: profile._id, ratingNumber: 5 })}
+          onClick={() => this.onLikeClick({ id: auth.user.id, profileId: profile._id, profileUserId: profile.user._id, ratingNumber: 5 })}
           type="button"
           className="btn btn-light mr-1"
         >
@@ -61,12 +64,14 @@ PostRating.propTypes = {
   removeLike: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.profile
+  profile: state.profile,
+  user: state.user
 });
 
 export default connect(
