@@ -32,10 +32,14 @@ export const addPost = postData => dispatch => {
 
 // Add rating
 export const addRating = payload => dispatch => {
-  const { id, profileId,profileUserId, ratingNumber, handle } = payload;
-  console.log("ididii",profileId);
+  const { id, profileId, profileUserId, ratingNumber, handle } = payload;
+  console.log("ididii", id);
   axios
-    .post(`/api/profile/rating/${id}`, { ratingNumber, profileId, profileUserId })
+    .post(`/api/profile/rating/${id}`, {
+      ratingNumber,
+      profileId,
+      profileUserId
+    })
     .then(
       res =>
         dispatch({
@@ -50,7 +54,7 @@ export const addRating = payload => dispatch => {
           type: GET_ERRORS,
           payload: err.response.data
         }),
-      console.log("bčč",payload)
+      console.log("bčč", payload)
     );
 };
 

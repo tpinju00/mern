@@ -220,39 +220,36 @@ router.post(
   }
 );
 
-// @route       POST api/posts/rating/:id
+// @route       POST api/profile/rating/:id
 // @description Add rating
 // @access      Private
 router.post(
   "/rating/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("xxxxxxxxxxxxxx",req.body.profileUserId);
-      Profile.findById(req.body.profileId)
-        .then(profile => {
-          console.log(profile.ratings);
-          if (
-            profile.ratings.filter(
-              rating => rating.user.toString() === req.user.id
-            ).length > 0
-          ) {
-            return res
-              .status(400)
-              .json({ alreadyrated: "User already rated this profile" });
-          }
-          //console.log("jukica:",req.body.profileId);
-          profile.ratings.unshift(
-            { user: req.user.id },
-            { ratingNumber: req.body.ratingNumber }
-          );
-
-          profile.save().then(profile => res.json(profile));
-        })
-        .catch(err => {
-          res.status(404).json({ profilenotfound: "No profile found" })
+    console.log("Profile ID that we are rating", req.body.profileId);
+    Profile.findById(req.body.profileId)
+      .then(profile => {
+        console.log("All in the profile ratings", profile.ratings);
+        if (
+          profile.ratings.filter(
+            rating => rating.user.toString() === req.user.id
+          ).length > 0
+        ) {
+          return res
+            .status(400)
+            .json({ alreadyrated: "User already rated this profile" });
         }
-
+        profile.ratings.unshift(
+          { user: req.user.id },
+          { ratingNumber: req.body.ratingNumber }
         );
+
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => {
+        res.status(404).json({ profilenotfound: "No profile found" });
+      });
   }
 );
 

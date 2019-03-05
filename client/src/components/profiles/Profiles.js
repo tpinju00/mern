@@ -20,7 +20,8 @@ class Profiles extends Component {
 
     this.state = {
       level: "",
-      status: "",
+      subject: "",
+      location: "",
       filteredByStatus: [],
       filteredByLevel: [],
       errors: {}
@@ -36,9 +37,10 @@ class Profiles extends Component {
       // const values = queryString.parse(this.props.location.search);
       // console.log(values.status);
       // // ENd test
-      if (!this.props.history.location.state.redirect == "submit") {
+      /*if (!this.props.history.location.state.redirect == "submit") {
         this.props.getProfiles();
-      }
+      }*/
+      this.props.getProfiles();
     }
   }
 
@@ -56,8 +58,12 @@ class Profiles extends Component {
 
     const filters = {};
 
-    if (this.state.status !== "") {
-      filters.status = this.state.status;
+    if (this.state.location !== "") {
+      filters.location = this.state.location;
+    }
+
+    if (this.state.subject !== "") {
+      filters.subject = this.state.subject;
     }
     if (this.state.level !== "") {
       filters.level = this.state.level;
@@ -105,29 +111,27 @@ class Profiles extends Component {
       }
     }
 
-    const options = [
-      { label: "* Select Professional Status", value: 0 },
-      { label: "Developer", value: "Developer" },
-      { label: "Student", value: "Student" },
-      { label: "Senior Developer", value: "Senior Developer" },
-      { label: "Manager", value: "Manager" },
-      { label: "Student or Learning", value: "Student or Learning" },
-      { label: "Instructor or Teacher", value: "Instructor or Teacher" },
-      { label: "Intern", value: "Intern" },
-      { label: "Other", value: "Other" }
+    const optionsSubject = [
+      { label: "* Odaberite predmete", value: 0 },
+      { label: "Matematika", value: "Matematika" },
+      { label: "Hrvatski", value: "Hrvatski" },
+      { label: "Seminari", value: "Seminari" }
     ];
 
     // Select options for level
     const optionsLevel = [
-      { label: "* Odaberi svoj nivo podučavanja", value: 0 },
+      { label: "* Odaberite stupanj", value: 0 },
       { label: "Predškolski", value: "Predškolski" },
       { label: "Osnovnoškolski", value: "Osnovnoškolski" },
       { label: "Srednjoškolski", value: "Srednjoškolski" },
-      { label: "Fakultetski", value: "Fakultetski" },
-      { label: "Student or Learning", value: "Student or Learning" },
-      { label: "Instructor or Teacher", value: "Instructor or Teacher" },
-      { label: "Intern", value: "Intern" },
-      { label: "Other", value: "Other" }
+      { label: "Fakultet", value: "Fakultet" }
+    ];
+
+    const optionsLocation = [
+      { label: "* Odaberite svoj grad", value: 0 },
+      { label: "Split", value: "Split" },
+      { label: "Zagreb", value: "Zagreb" },
+      { label: "Osijek", value: "Osijek" }
     ];
 
     return (
@@ -141,13 +145,20 @@ class Profiles extends Component {
               </p>
               <form onSubmit={this.onSubmit}>
                 <SelectListGroup
-                  placeholder="Status"
-                  name="status"
-                  value={this.state.status}
+                  placeholder="Location"
+                  name="location"
+                  value={this.state.location}
                   onChange={this.onChange}
-                  options={options}
-                  error={errors.status}
-                  info="Give us an idea of where you are at in your career"
+                  options={optionsLocation}
+                  error={errors.location}
+                />
+                <SelectListGroup
+                  placeholder="Subject"
+                  name="subject"
+                  value={this.state.subject}
+                  onChange={this.onChange}
+                  options={optionsSubject}
+                  error={errors.subject}
                 />
                 <SelectListGroup
                   placeholder="Level"
@@ -156,8 +167,8 @@ class Profiles extends Component {
                   onChange={this.onChange}
                   options={optionsLevel}
                   error={errors.level}
-                  info="Give us an idea of where you are at in your career"
                 />
+
                 <input
                   type="submit"
                   value="Submit"

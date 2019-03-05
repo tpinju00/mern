@@ -15,7 +15,7 @@ class CreateProfile extends Component {
     this.state = {
       displaySocialInputs: false,
       handle: "",
-      status: "",
+      subject: "",
       level: "",
       company: "",
       website: "",
@@ -81,7 +81,7 @@ class CreateProfile extends Component {
         company: profile.company,
         website: profile.website,
         location: profile.location,
-        status: profile.status,
+        subject: profile.subject,
         level: profile.level,
         skills: skillsCSV,
         githubusername: profile.githubusername,
@@ -103,7 +103,7 @@ class CreateProfile extends Component {
       company: this.state.company,
       website: this.state.website,
       location: this.state.location,
-      status: this.state.status,
+      subject: this.state.subject,
       level: this.state.level,
       skills: this.state.skills,
       githubusername: this.state.githubusername,
@@ -179,16 +179,11 @@ class CreateProfile extends Component {
     }
 
     // Select options for status
-    const options = [
-      { label: "* Select Professional Status", value: 0 },
-      { label: "Developer", value: "Developer" },
-      { label: "Student", value: "Student" },
-      { label: "Senior Developer", value: "Senior Developer" },
-      { label: "Manager", value: "Manager" },
-      { label: "Student or Learning", value: "Student or Learning" },
-      { label: "Instructor or Teacher", value: "Instructor or Teacher" },
-      { label: "Intern", value: "Intern" },
-      { label: "Other", value: "Other" }
+    const optionsSubject = [
+      { label: "* Odaberite predmete", value: 0 },
+      { label: "Matematika", value: "Matematika" },
+      { label: "Hrvatski", value: "Hrvatski" },
+      { label: "Seminari", value: "Seminari" }
     ];
 
     // Select options for level
@@ -197,11 +192,14 @@ class CreateProfile extends Component {
       { label: "Predškolski", value: "Predškolski" },
       { label: "Osnovnoškolski", value: "Osnovnoškolski" },
       { label: "Srednjoškolski", value: "Srednjoškolski" },
-      { label: "Fakultetski", value: "Fakultetski" },
-      { label: "Student or Learning", value: "Student or Learning" },
-      { label: "Instructor or Teacher", value: "Instructor or Teacher" },
-      { label: "Intern", value: "Intern" },
-      { label: "Other", value: "Other" }
+      { label: "Fakultet", value: "Fakultet" }
+    ];
+
+    const optionsLocation = [
+      { label: "* Odaberite svoj grad", value: 0 },
+      { label: "Split", value: "Split" },
+      { label: "Zagreb", value: "Zagreb" },
+      { label: "Osijek", value: "Osijek" }
     ];
     return (
       <div className="create-profile">
@@ -223,13 +221,22 @@ class CreateProfile extends Component {
                   info="A unique handle for your profile URL. Your full name, company name, nickname"
                 />
                 <SelectListGroup
-                  placeholder="Status"
-                  name="status"
-                  value={this.state.status}
+                  placeholder="Location"
+                  name="location"
+                  value={this.state.location}
                   onChange={this.onChange}
-                  options={options}
-                  error={errors.status}
-                  info="Give us an idea of where you are at in your career"
+                  options={optionsLocation}
+                  error={errors.location}
+                  info="Give us an idea of where you are located"
+                />
+                <SelectListGroup
+                  placeholder="Subject"
+                  name="subject"
+                  value={this.state.subject}
+                  onChange={this.onChange}
+                  options={optionsSubject}
+                  error={errors.subject}
+                  info="Odaberi predmete"
                 />
                 <SelectListGroup
                   placeholder="Level"
@@ -240,6 +247,7 @@ class CreateProfile extends Component {
                   error={errors.level}
                   info="Give us an idea of where you are at in your career"
                 />
+
                 <TextFieldGroup
                   placeholder="Company"
                   name="company"
@@ -255,14 +263,6 @@ class CreateProfile extends Component {
                   onChange={this.onChange}
                   error={errors.website}
                   info="Could be your own website or a company one"
-                />
-                <TextFieldGroup
-                  placeholder="Location"
-                  name="location"
-                  value={this.state.location}
-                  onChange={this.onChange}
-                  error={errors.location}
-                  info="City or city & state suggested (eg. Boston, MA)"
                 />
                 <TextFieldGroup
                   placeholder="* Skills"

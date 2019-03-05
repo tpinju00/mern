@@ -11,7 +11,11 @@ const ProfileSchema = new Schema({
     required: true,
     max: 40
   },
-  status: {
+  location: {
+    type: String,
+    required: true
+  },
+  subject: {
     type: String,
     required: true
   },
@@ -23,9 +27,6 @@ const ProfileSchema = new Schema({
     type: String
   },
   website: {
-    type: String
-  },
-  location: {
     type: String
   },
   skills: {
