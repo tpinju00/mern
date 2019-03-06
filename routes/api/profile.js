@@ -177,7 +177,7 @@ router.post(
     if (req.body.website) profileFields.website = req.body.website;
     if (req.body.location) profileFields.location = req.body.location;
     if (req.body.bio) profileFields.bio = req.body.bio;
-    if (req.body.status) profileFields.status = req.body.status;
+    if (req.body.subject) profileFields.subject = req.body.subject;
     if (req.body.level) profileFields.level = req.body.level;
     if (req.body.githubusername)
       profileFields.githubusername = req.body.githubusername;
@@ -227,25 +227,48 @@ router.post(
   "/rating/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("Profile ID that we are rating", req.body.profileId);
+    //console.log("Profile ID that we are rating", req.body.profileId);
     Profile.findById(req.body.profileId)
       .then(profile => {
-        console.log("All in the profile ratings", profile.ratings);
+        //console.log("All in the profile ratings", profile.ratings);
+        console.log("broj ratinga je:", profile.ratings.ratingNumber);
         if (
           profile.ratings.filter(
-            rating => rating.user.toString() === req.user.id
+            rating => rating.user && rating.user.toString() === req.user.id
           ).length > 0
         ) {
           return res
             .status(400)
             .json({ alreadyrated: "User already rated this profile" });
         }
+
         profile.ratings.unshift(
           { user: req.user.id },
           { ratingNumber: req.body.ratingNumber }
         );
 
-        profile.save().then(profile => res.json(profile));
+        const ratingNumbers = profile.ratings.filter(
+          rating => rating.ratingNumber
+        );
+
+        console.log("no of ratings:", ratingNumbers);
+
+        const average =
+          ratingNumbers.reduce(
+            (accumulator, ratingNumber) =>
+              (accumulator += ratingNumber.ratingNumber),
+            0
+          ) / ratingNumbers.length;
+
+        //  console.log("hehe:", average);
+
+        profile.totalRating = average;
+        console.log("sumaje", profile.totalRating);
+
+        profile
+          .save()
+          .then(profile => res.json(profile))
+          .catch(err => console.log("Error is:", err));
       })
       .catch(err => {
         res.status(404).json({ profilenotfound: "No profile found" });

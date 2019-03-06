@@ -12,7 +12,13 @@ class PostRating extends Component {
 
   onLikeClick({ id, profileId, profileUserId, ratingNumber }) {
     const handle = this.props.handle;
-    this.props.addRating({ id, profileId, profileUserId, ratingNumber, handle });
+    this.props.addRating({
+      id,
+      profileId,
+      profileUserId,
+      ratingNumber,
+      handle
+    });
   }
 
   onUnlikeClick(id) {
@@ -36,12 +42,73 @@ class PostRating extends Component {
     return (
       <div>
         <button
-          onClick={() => this.onLikeClick({ id: auth.user.id, profileId: profile._id, profileUserId: profile.user._id, ratingNumber: 5 })}
+          onClick={() =>
+            this.onLikeClick({
+              id: auth.user.id,
+              profileId: profile._id,
+              profileUserId: profile.user._id,
+              ratingNumber: 1
+            })
+          }
           type="button"
           className="btn btn-light mr-1"
         >
           <i
-            className={classnames("fas fa-thumbs-up", {
+            className={classnames("fas fa-star", {
+              "text-info": this.findUserLike(profile.ratings)
+            })}
+          />
+        </button>
+        <button
+          onClick={() =>
+            this.onLikeClick({
+              id: auth.user.id,
+              profileId: profile._id,
+              profileUserId: profile.user._id,
+              ratingNumber: 2
+            })
+          }
+          type="button"
+          className="btn btn-light mr-1"
+        >
+          <i
+            className={classnames("fas fa-star", {
+              "text-info": this.findUserLike(profile.ratings)
+            })}
+          />
+        </button>
+        <button
+          onClick={() =>
+            this.onLikeClick({
+              id: auth.user.id,
+              profileId: profile._id,
+              profileUserId: profile.user._id,
+              ratingNumber: 3
+            })
+          }
+          type="button"
+          className="btn btn-light mr-1"
+        >
+          <i
+            className={classnames("fas fa-star", {
+              "text-info": this.findUserLike(profile.ratings)
+            })}
+          />
+        </button>
+        <button
+          onClick={() =>
+            this.onLikeClick({
+              id: auth.user.id,
+              profileId: profile._id,
+              profileUserId: profile.user._id,
+              ratingNumber: 4
+            })
+          }
+          type="button"
+          className="btn btn-light mr-1"
+        >
+          <i
+            className={classnames("fas fa-star", {
               "text-info": this.findUserLike(profile.ratings)
             })}
           />
@@ -49,6 +116,25 @@ class PostRating extends Component {
             {profile.ratings.ratingNumber}
           </span>
         </button>
+        <button
+          onClick={() =>
+            this.onLikeClick({
+              id: auth.user.id,
+              profileId: profile._id,
+              profileUserId: profile.user._id,
+              ratingNumber: 5
+            })
+          }
+          type="button"
+          className="btn btn-light mr-1"
+        >
+          <i
+            className={classnames("fas fa-star", {
+              "text-info": this.findUserLike(profile.ratings)
+            })}
+          />
+        </button>
+        <span className="badge badge-light">{profile.totalRating}</span>
       </div>
     );
   }

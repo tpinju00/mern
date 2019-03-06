@@ -54,6 +54,8 @@ class CreateProfile extends Component {
       profile.company = !isEmpty(profile.company) ? profile.company : "";
       profile.website = !isEmpty(profile.website) ? profile.website : "";
       profile.location = !isEmpty(profile.location) ? profile.location : "";
+      profile.subject = !isEmpty(profile.subject) ? profile.subject : "";
+      profile.level = !isEmpty(profile.level) ? profile.level : "";
       profile.githubusername = !isEmpty(profile.githubusername)
         ? profile.githubusername
         : "";
@@ -227,7 +229,7 @@ class CreateProfile extends Component {
                   onChange={this.onChange}
                   options={optionsLocation}
                   error={errors.location}
-                  info="Give us an idea of where you are located"
+                  info="Odaberi lokaciju"
                 />
                 <SelectListGroup
                   placeholder="Subject"
@@ -245,7 +247,7 @@ class CreateProfile extends Component {
                   onChange={this.onChange}
                   options={optionsLevel}
                   error={errors.level}
-                  info="Give us an idea of where you are at in your career"
+                  info="Odaberi level"
                 />
 
                 <TextFieldGroup
