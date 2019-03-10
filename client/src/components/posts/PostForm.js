@@ -31,7 +31,7 @@ class PostForm extends Component {
     const newPost = {
       text: this.state.text,
       name: user.name,
-      picture: user.picture,
+      picture: profile.picture,
       handle: profile.handle
     };
 

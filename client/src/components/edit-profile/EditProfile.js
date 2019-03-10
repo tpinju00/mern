@@ -8,6 +8,7 @@ import InputGroup from "../common/InputGroup";
 import SelectListGroup from "../common/SelectListGroup";
 import { createProfile, getCurrentProfile } from "../../actions/profileActions";
 import isEmpty from "../../validation/is-empty";
+import axios from "axios";
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class CreateProfile extends Component {
       subject: "",
       level: "",
       company: "",
-      website: "",
+      price: "",
       location: "",
       skills: "",
       githubusername: "",
@@ -28,7 +29,8 @@ class CreateProfile extends Component {
       linkedin: "",
       youtube: "",
       instagram: "",
-      errors: {}
+      errors: {},
+      selectedFile: null
     };
 
     this.onChange = this.onChange.bind(this);
@@ -52,7 +54,7 @@ class CreateProfile extends Component {
 
       // If profile field doesn't exist, make empty string
       profile.company = !isEmpty(profile.company) ? profile.company : "";
-      profile.website = !isEmpty(profile.website) ? profile.website : "";
+      profile.price = !isEmpty(profile.price) ? profile.price : "";
       profile.location = !isEmpty(profile.location) ? profile.location : "";
       profile.subject = !isEmpty(profile.subject) ? profile.subject : "";
       profile.level = !isEmpty(profile.level) ? profile.level : "";
@@ -81,7 +83,7 @@ class CreateProfile extends Component {
       this.setState({
         handle: profile.handle,
         company: profile.company,
-        website: profile.website,
+        price: profile.price,
         location: profile.location,
         subject: profile.subject,
         level: profile.level,
@@ -103,7 +105,7 @@ class CreateProfile extends Component {
     const profileData = {
       handle: this.state.handle,
       company: this.state.company,
-      website: this.state.website,
+      price: this.state.price,
       location: this.state.location,
       subject: this.state.subject,
       level: this.state.level,
@@ -124,8 +126,35 @@ class CreateProfile extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  fileSelectedHandler = event => {
+    this.setState({
+      selectedFile: event.target.files[0]
+    });
+  };
+
+  fileUploadHandler = ({ profileId }) => {
+    const formData = new FormData();
+    formData.append("profileImage", this.state.selectedFile);
+    formData.append("profileId", profileId);
+
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data"
+      }
+    };
+    console.log("profile id", profileId);
+    axios
+      .post("api/profile/upload", formData, config)
+      .then(response => {
+        alert("The file is successfully uploaded");
+      })
+      .catch(error => {});
+  };
+
   render() {
     const { errors, displaySocialInputs } = this.state;
+    const { profile } = this.props.profile;
+    console.log("IDIDI", profile);
 
     let socialInputs;
 
@@ -259,12 +288,12 @@ class CreateProfile extends Component {
                   info="Could be your own company or one you work for"
                 />
                 <TextFieldGroup
-                  placeholder="Website"
-                  name="website"
-                  value={this.state.website}
+                  placeholder="price"
+                  name="price"
+                  value={this.state.price}
                   onChange={this.onChange}
-                  error={errors.website}
-                  info="Could be your own website or a company one"
+                  error={errors.price}
+                  info="Could be your own price or a company one"
                 />
                 <TextFieldGroup
                   placeholder="* Skills"
@@ -313,6 +342,20 @@ class CreateProfile extends Component {
                 />
               </form>
             </div>
+            <input
+              type="file"
+              name="profileImage"
+              onChange={this.fileSelectedHandler}
+            />
+            <button
+              onClick={() =>
+                this.fileUploadHandler({
+                  profileId: profile._id
+                })
+              }
+            >
+              Upload
+            </button>
           </div>
         </div>
       </div>

@@ -14,6 +14,66 @@ const Profile = require("../../models/Profile");
 // Load User Model
 const User = require("../../models/User");
 
+/// Image upload
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, "client/public/uploads/");
+  },
+  filename: function(req, file, cb) {
+    cb(null, Date.now() + file.originalname);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  // reject a file
+  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5
+  },
+  fileFilter: fileFilter
+});
+
+// @route       GET api/profile/test
+// @description Tests profile route
+// @access      Public
+router.post("/upload", upload.single("profileImage"), (req, res) => {
+  console.log("crnjak klaune", req.file);
+  //req.file.destination +
+  profilePath = req.file.filename;
+
+  console.log("ne radi", req.body);
+
+  Profile.findById(req.body.profileId)
+    .then(profile => {
+      if (profile.picture) {
+        return res.status(400).json({
+          alreadhasapicture: "Please delete your current profile picture"
+        });
+      }
+
+      profile.picture = profilePath;
+
+      profile
+        .save()
+        .then(profile => res.json(profile))
+        .catch(err => console.log("Error is:", err));
+    })
+    .catch(err => {
+      res.status(404).json({ profilenotfound: "No profile found" });
+    });
+});
+///End Image upload
+
 // @route       GET api/profile/test
 // @description Tests profile route
 // @access      Public
@@ -173,8 +233,9 @@ router.post(
     const profileFields = {};
     profileFields.user = req.user.id;
     if (req.body.handle) profileFields.handle = req.body.handle;
+    /*if (req.file.originalname) profileFields.picture = req.file.originalname;*/
     if (req.body.company) profileFields.company = req.body.company;
-    if (req.body.website) profileFields.website = req.body.website;
+    if (req.body.price) profileFields.price = req.body.price;
     if (req.body.location) profileFields.location = req.body.location;
     if (req.body.bio) profileFields.bio = req.body.bio;
     if (req.body.subject) profileFields.subject = req.body.subject;

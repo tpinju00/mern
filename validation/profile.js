@@ -34,10 +34,8 @@ module.exports = function validateProfileInput(data) {
     errors.skills = "Skills field is required";
   }
 
-  if (!isEmpty(data.website)) {
-    if (!Validator.isURL(data.website)) {
-      errors.website = "Not a valid URL";
-    }
+  if (Validator.isEmpty(data.price)) {
+    errors.price = "price  field is required";
   }
 
   if (!isEmpty(data.facebook)) {

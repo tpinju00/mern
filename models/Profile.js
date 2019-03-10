@@ -11,6 +11,9 @@ const ProfileSchema = new Schema({
     required: true,
     max: 40
   },
+  picture: {
+    type: String
+  },
   location: {
     type: String,
     required: true
@@ -26,8 +29,8 @@ const ProfileSchema = new Schema({
   company: {
     type: String
   },
-  website: {
-    type: String
+  price: {
+    type: Number
   },
   skills: {
     type: [String],

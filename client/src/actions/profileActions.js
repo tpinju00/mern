@@ -10,6 +10,27 @@ import {
   GET_PROFILES
 } from "./types";
 
+//post a picture
+export const postProfilePicture = (
+  selectedFile,
+  selectedFileName
+) => dispatch => {
+  dispatch(setProfileLoading());
+  const data = new FormData();
+  data.append("file", this.state.selectedFile, this.state.selectedFile.name);
+  axios
+    .post("api/profile/upload", {
+      onUploadProgress: ProgressEvent => {
+        this.setState({
+          loaded: (ProgressEvent.loaded / ProgressEvent.total) * 100
+        });
+      }
+    })
+    .then(res => {
+      console.log(res.statusText);
+    });
+};
+
 //get current profile
 export const getCurrentProfile = () => dispatch => {
   dispatch(setProfileLoading());

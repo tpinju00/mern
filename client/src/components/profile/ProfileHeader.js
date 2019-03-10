@@ -11,11 +11,7 @@ class ProfileHeader extends Component {
           <div className="card card-body bg-info text-white mb-3">
             <div className="row">
               <div className="col-4 col-md-3 m-auto">
-                <img
-                  className="rounded-circle"
-                  src={profile.user.picture}
-                  alt=""
-                />
+                <img className="rounded-circle" src={profile.picture} alt="" />
               </div>
             </div>
             <div className="text-center">
@@ -29,10 +25,10 @@ class ProfileHeader extends Component {
               {profile.level}
               {isEmpty(profile.location) ? null : <p>{profile.location}</p>}
               <p>
-                {isEmpty(profile.website) ? null : (
+                {isEmpty(profile.price) ? null : (
                   <a
                     className="text-white p-2"
-                    href={profile.website}
+                    href={profile.price}
                     target="_blank"
                   >
                     <i className="fas fa-globe fa-2x" />

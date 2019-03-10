@@ -8,19 +8,19 @@ const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
 const posts = require("./routes/api/posts");
 
-//img upload
+const morgan = require("morgan");
 const path = require("path");
-const crypto = require("crypto");
-const multer = require("multer");
-const GridFsStorage = require("multer-gridfs-storage");
-const Grid = require("gridfs-stream");
-const methodOverride = require("method-override");
 
 const app = express();
 
-// img upload
-app.use(methodOverride("_method"));
-app.set("view engine", "ejs");
+//img upload2
+app.use(morgan("dev"));
+//app.use(express.static(__dirname + "/uploads"));
+app.use(
+  "/uploads",
+  express.static(path.join(__dirname, "/client/public/uploads"))
+);
+//app.use("uploads", express.static("uploads"));
 
 //Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
