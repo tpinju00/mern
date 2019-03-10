@@ -12,11 +12,19 @@ class ProfileItem extends Component {
       <div className="card">
         <div className={styles.Row}>
           <div className="col-2">
-            <img
-              src={"http://localhost:3000/uploads/" + profile.picture}
-              alt=""
-              className="rounded-circle"
-            />
+            {isEmpty(profile.picture) ? (
+              <img
+                src={"http://localhost:3000/uploads/1552227868518download.png"}
+                alt=""
+                className="rounded-circle"
+              />
+            ) : (
+              <img
+                src={"http://localhost:3000/uploads/" + profile.picture}
+                alt=""
+                className="rounded-circle"
+              />
+            )}
           </div>
           <div className="col-lg-6">
             <h3>{profile.user.name}</h3>

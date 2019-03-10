@@ -9,6 +9,7 @@ import SelectListGroup from "../common/SelectListGroup";
 import { createProfile, getCurrentProfile } from "../../actions/profileActions";
 import isEmpty from "../../validation/is-empty";
 import axios from "axios";
+import Select from "react-select";
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -30,7 +31,8 @@ class CreateProfile extends Component {
       youtube: "",
       instagram: "",
       errors: {},
-      selectedFile: null
+      selectedFile: null,
+      selectedOption: null
     };
 
     this.onChange = this.onChange.bind(this);
@@ -151,10 +153,16 @@ class CreateProfile extends Component {
       .catch(error => {});
   };
 
+  handleChange = selectedOption => {
+    this.setState({ selectedOption });
+    console.log(`Option selected:`, selectedOption);
+  };
+
   render() {
     const { errors, displaySocialInputs } = this.state;
     const { profile } = this.props.profile;
     console.log("IDIDI", profile);
+    const { selectedOption } = this.state;
 
     let socialInputs;
 
@@ -356,6 +364,12 @@ class CreateProfile extends Component {
             >
               Upload
             </button>
+            <Select
+              value={selectedOption}
+              onChange={this.handleChange}
+              options={optionsSubject}
+              isMulti={true}
+            />
           </div>
         </div>
       </div>

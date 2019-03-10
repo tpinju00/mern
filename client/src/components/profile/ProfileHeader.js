@@ -11,29 +11,40 @@ class ProfileHeader extends Component {
           <div className="card card-body bg-info text-white mb-3">
             <div className="row">
               <div className="col-4 col-md-3 m-auto">
-                <img className="rounded-circle" src={profile.picture} alt="" />
+                {isEmpty(profile.picture) ? (
+                  <img
+                    src={
+                      "http://localhost:3000/uploads/1552227868518download.png"
+                    }
+                    alt=""
+                    className="rounded-circle"
+                  />
+                ) : (
+                  <img
+                    src={"http://localhost:3000/uploads/" + profile.picture}
+                    alt=""
+                    className="rounded-circle"
+                  />
+                )}
               </div>
             </div>
             <div className="text-center">
               <h1 className="display-4 text-center">{profile.user.name}</h1>
-              <p className="lead text-center">
-                {profile.status}{" "}
-                {isEmpty(profile.company) ? null : (
-                  <span>at {profile.company}</span>
-                )}
-              </p>
-              {profile.level}
-              {isEmpty(profile.location) ? null : <p>{profile.location}</p>}
               <p>
-                {isEmpty(profile.price) ? null : (
-                  <a
-                    className="text-white p-2"
-                    href={profile.price}
-                    target="_blank"
-                  >
-                    <i className="fas fa-globe fa-2x" />
-                  </a>
-                )}
+                {isEmpty(profile.location) ? null : (
+                  <span>{profile.location}</span>
+                )}{" "}
+              </p>
+              <p>{profile.bio} </p>
+              <p>
+                {profile.subject} {profile.level}
+              </p>
+              <p>
+                <p>
+                  {isEmpty(profile.price) ? null : (
+                    <span>{profile.price + " Kuna po satu"}</span>
+                  )}
+                </p>
 
                 {isEmpty(profile.social && profile.social.twitter) ? null : (
                   <a
