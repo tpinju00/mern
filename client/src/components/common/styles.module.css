@@ -1,0 +1,53 @@
+.categoriesFP {
+  display: inline-table;
+  box-sizing: border-box;
+  margin-top: 100px;
+}
+
+.category {
+  background: white;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  overflow: hidden;
+  height: 60px;
+  width: 200px;
+  border: 1px solid transparent;
+  -webkit-transition: box-shadow 0.2s ease;
+  -moz-transition: box-shadow 0.2s ease;
+  -ms-transition: box-shadow 0.2s ease;
+  -o-transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
+  font-size: 15px;
+  color: #3c5a40;
+}
+
+.formGroup {
+  text-align: center;
+}
+
+.signUpFields {
+  width: 360px;
+  height: 44px;
+  margin: 0.5em;
+  padding: 0 1em;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid lightgray;
+  font-size: 1em;
+  margin-bottom: 1em;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  overflow: hidden;
+  -webkit-transition: box-shadow 0.2s ease;
+  -moz-transition: box-shadow 0.2s ease;
+  -ms-transition: box-shadow 0.2s ease;
+  -o-transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
+  color: #3c5a40;
+  border-radius: 3px;
+}

@@ -1,0 +1,148 @@
+.Row {
+  display: flex;
+}
+
+.title {
+  font-size: 44px;
+  margin-top: 100px;
+  font-weight: bold;
+  background-color: transparent;
+  text-align: center;
+  color: white;
+}
+
+.subtitle {
+  font-size: 24px;
+  font-weight: bold;
+  background-color: transparent;
+  text-align: center;
+  color: white;
+}
+
+.formFP {
+  text-align: center;
+}
+
+.submitButton {
+  background-color: #bdb436;
+  color: white;
+  font-size: 24px;
+  padding-bottom: 6px;
+  font-weight: bold;
+  transition: all 0.25s linear;
+  overflow-x: hidden;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  height: 60px;
+  width: 200px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+
+.background2p {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: no-repeat fixed;
+  background: #63856a; /* Old browsers */
+  background: -moz-radial-gradient(
+    center,
+    ellipse cover,
+    #63856a 1%,
+    #3c5a40 100%
+  ); /* FF3.6+ */
+  background: -webkit-gradient(
+    radial,
+    center center,
+    0px,
+    center center,
+    100%,
+    color-stop(1%, #63856a),
+    color-stop(100%, #3c5a40)
+  ); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(
+    center,
+    ellipse cover,
+    #63856a 1%,
+    #3c5a40 100%
+  ); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(
+    center,
+    ellipse cover,
+    #63856a 1%,
+    #3c5a40 100%
+  ); /* Opera 12+ */
+  background: -ms-radial-gradient(
+    center,
+    ellipse cover,
+    #63856a 1%,
+    #3c5a40 100%
+  ); /* IE10+ */
+  background: radial-gradient(
+    ellipse at center,
+    #63856a 1%,
+    #3c5a40 100%
+  ); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#63856a', endColorstr='#3c5a40',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.personCard {
+  padding: 1px 1px 1px 10px;
+  margin: 20px 30px 0px 30px;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 1px 3px 0 rgba(63, 63, 68, 0.15),
+    0 0 0 1px rgba(63, 63, 68, 0.05);
+  transition-property: box-shadow, border;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-in-out;
+}
+
+.personCard:hover {
+  box-shadow: 0 2px 12px 1px rgba(39, 44, 48, 0.16);
+  z-index: 1;
+}
+
+.rate {
+  float: left;
+  height: 46px;
+  padding: 0 10px;
+}
+.rate:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+}
+.rate:not(:checked) > label {
+  float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 30px;
+  color: #ccc;
+}
+.rate:not(:checked) > label:before {
+  content: "★ ";
+}
+.rate > input:checked ~ label {
+  color: #3c5a40;
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #3c5a40;
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #3c5a40;
+}
+
+.leftProfile {
+  display: grid;
+  text-align: center;
+  border-left: solid 1px #dfe3e8;
+  margin-left: 20px;
+}

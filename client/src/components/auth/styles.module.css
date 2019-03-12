@@ -1,0 +1,104 @@
+@mixin transition($transition-property, $transition-time, $method) {
+  -webkit-transition: $transition-property $transition-time $method;
+  -moz-transition: $transition-property $transition-time $method;
+  -ms-transition: $transition-property $transition-time $method;
+  -o-transition: $transition-property $transition-time $method;
+  transition: $transition-property $transition-time $method;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  text-align: center;
+}
+
+body {
+  background: white;
+}
+
+.mainForm {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background: no-repeat fixed;
+  background: #63856a; /* Old browsers */
+  background: -moz-radial-gradient(
+    center,
+    ellipse cover,
+    #63856a 1%,
+    #3c5a40 100%
+  ); /* FF3.6+ */
+  background: -webkit-gradient(
+    radial,
+    center center,
+    0px,
+    center center,
+    100%,
+    color-stop(1%, #63856a),
+    color-stop(100%, #3c5a40)
+  ); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(
+    center,
+    ellipse cover,
+    #63856a 1%,
+    #3c5a40 100%
+  ); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(
+    center,
+    ellipse cover,
+    #63856a 1%,
+    #3c5a40 100%
+  ); /* Opera 12+ */
+  background: -ms-radial-gradient(
+    center,
+    ellipse cover,
+    #63856a 1%,
+    #3c5a40 100%
+  ); /* IE10+ */
+  background: radial-gradient(
+    ellipse at center,
+    #63856a 1%,
+    #3c5a40 100%
+  ); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#63856a', endColorstr='#3c5a40',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+h1 {
+  position: relative;
+  font-size: 40px;
+  margin-bottom: 25px;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.subtitle {
+  position: relative;
+  font-size: 20px;
+  margin-bottom: 25px;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.submitButton {
+  background-color: #bdb436;
+  color: white;
+  font-size: 16px;
+  padding-bottom: 6px;
+  font-weight: bold;
+  transition: all 0.25s linear;
+  overflow-x: hidden;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  height: 40px;
+  width: 110px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  text-align: center;
+}
