@@ -36,7 +36,8 @@ class ProfileItem extends Component {
             </p>
             <p>{profile.bio} </p>
             <p>
-              {profile.subject} {profile.level}
+              {profile.subjects}
+              {profile.level}
             </p>
           </div>
           <div className={styles.leftProfile}>

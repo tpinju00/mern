@@ -46,6 +46,8 @@ class CreateProfile extends Component {
   onSubmit(e) {
     e.preventDefault();
 
+    console.log("create profile", this.state.subjects);
+
     const profileData = {
       handle: this.state.handle,
       company: this.state.company,

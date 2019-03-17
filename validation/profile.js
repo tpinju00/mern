@@ -5,8 +5,20 @@ module.exports = function validateProfileInput(data) {
   let errors = {};
 
   data.handle = !isEmpty(data.handle) ? data.handle : "";
+  data.company = !isEmpty(data.company) ? data.company : "";
   data.location = !isEmpty(data.location) ? data.location : "";
   data.subject = !isEmpty(data.subject) ? data.subject : "";
+
+  console.log("data subjects", data.subjects);
+  console.log("length", data.subjects.length);
+
+  if (data.subjects && data.subjects.length) {
+    data.subjects = data.subjects;
+    console.log("not empty");
+  } else {
+    data.subjects = "";
+    console.log("empty");
+  }
   data.level = !isEmpty(data.level) ? data.level : "";
   data.skills = !isEmpty(data.skills) ? data.skills : "";
 
@@ -16,6 +28,14 @@ module.exports = function validateProfileInput(data) {
 
   if (Validator.isEmpty(data.handle)) {
     errors.handle = "Profile handle is required";
+  }
+
+  if (Validator.isEmpty(data.company)) {
+    errors.company = "Profile company is required";
+  }
+
+  if (!data.price) {
+    errors.price = "Profile price is required";
   }
 
   if (Validator.isEmpty(data.location)) {
@@ -30,12 +50,12 @@ module.exports = function validateProfileInput(data) {
     errors.subject = "Subject  field is required";
   }
 
-  if (Validator.isEmpty(data.skills)) {
-    errors.skills = "Skills field is required";
+  if (!data.subjects) {
+    errors.subjects = "Subjects  field is required";
   }
 
-  if (Validator.isEmpty(data.price)) {
-    errors.price = "price  field is required";
+  if (Validator.isEmpty(data.skills)) {
+    errors.skills = "Skills field is required";
   }
 
   if (!isEmpty(data.facebook)) {
