@@ -36,8 +36,9 @@ class ProfileFilter extends Component {
     if (this.state.level !== "") {
       filters.level = this.state.level;
     }
-
-    //this.props.sendData(filters);
+    if (!this.props.skipMounting) {
+      this.props.sendData(filters);
+    }
 
     this.props.history.push({
       pathname: "/profiles",

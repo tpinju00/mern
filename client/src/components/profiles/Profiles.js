@@ -29,7 +29,7 @@ class Profiles extends Component {
   }
 
   componentDidMount() {
-    if (this.props.history.state) {
+    if (this.props.location.state) {
       console.log("filters iz stanja", this.props.location.state.filters);
       this.props.getProfiles(this.props.location.state.filters);
     } else {

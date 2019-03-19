@@ -44,7 +44,7 @@ class Landing extends Component {
                 skipMounting={this.state.skipMounting}
                 sendData={this.getFilterData}
               /> */}
-              <ProfileFilter />
+              <ProfileFilter skipMounting />
             </div>
           </div>
         </div>
