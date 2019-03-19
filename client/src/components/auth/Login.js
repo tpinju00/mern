@@ -54,7 +54,7 @@ class Login extends Component {
         <div className>
           <div className>
             <div className={styles.mainForm}>
-              <h1>Prijava</h1>
+              <h1 className={styles.title}>Prijava</h1>
               <p className={styles.subtitle}>
                 Prijavite se u Vaš račun na Repete.hr!
               </p>

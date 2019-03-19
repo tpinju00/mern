@@ -28,11 +28,24 @@ class Profiles extends Component {
     this.getFilterData = this.getFilterData.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+  componentDidMount() {
+    if (this.props.history.state) {
+      console.log("filters iz stanja", this.props.location.state.filters);
+      this.props.getProfiles(this.props.location.state.filters);
+    } else {
+      this.props.getProfiles();
     }
   }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log("prev props", prevProps);
+  //   console.log("prev state", prevState);
+  //   //this.props.getProfiles(this.props.history.location.state.filters);
+  // }
+
+  // componentWillMount() {
+  //   this.props.getProfiles();
+  // }
 
   getFilterData(filterParams) {
     console.log("filterParams", filterParams);
@@ -44,19 +57,19 @@ class Profiles extends Component {
     let profileItems;
 
     let newSkipMounting = 1;
-    console.log("PRESKOCI2222", this.props);
+    console.log("props being called", this.props);
     if (this.props.skipMounting) {
       newSkipMounting = 0;
     }
 
-    console.log("PRESKOCI2", newSkipMounting);
+    //console.log("PRESKOCI2", newSkipMounting);
 
     //console.log(profiles);
 
     if (isEmpty(profiles) || loading) {
       //profileStatusItems = <Spinner />;
     } else {
-      console.log("filter", this.props.skipMounting);
+      //console.log("filter", this.props.skipMounting);
       if (isEmpty(profiles) || this.props.skipMounting) {
         profileItems = <h1>No profiles</h1>;
       } else {

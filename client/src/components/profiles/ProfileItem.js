@@ -10,37 +10,37 @@ class ProfileItem extends Component {
 
     return (
       <div className={styles.personCard}>
-        <div className={styles.Row}>
-          <div className="col-2">
+        <div className={styles.insideCard}>
+          <div className={styles.separator1}>
             {isEmpty(profile.picture) ? (
               <img
                 src={"http://localhost:3000/uploads/1552227868518download.png"}
                 alt=""
-                className="rounded-circle"
+                className={styles.profilePicture}
               />
             ) : (
               <img
                 src={"http://localhost:3000/uploads/" + profile.picture}
                 alt=""
-                className="rounded-circle"
+                className={styles.profilePicture}
               />
             )}
           </div>
-          <div className="col-lg-6">
-            <h3>{profile.user.name}</h3>
 
+          <div className={styles.separator2}>
+            <h3>{profile.user.name}</h3>
             <p>
               {isEmpty(profile.location) ? null : (
                 <span>{profile.location}</span>
               )}{" "}
             </p>
-            <p>{profile.bio} </p>
+
             <p>
-              {profile.subjects}
-              {profile.level}
+              {profile.subject} {profile.level}
             </p>
           </div>
-          <div className={styles.leftProfile}>
+
+          <div className={styles.separator3}>
             <h4>Cijena i rating</h4>
             <p>{profile.totalRating} </p>
             <p>
@@ -70,6 +70,9 @@ class ProfileItem extends Component {
                 1 star
               </label>
             </div>
+            <Link to={`/profile/${profile.handle}`} className="btn">
+              Pogledaj profil
+            </Link>
             {/*<ul className="listgroup">
               {profile.skills.slice(0, 4).map((skill, index) => (
                 <li key={index} className="list-group-item">
@@ -78,10 +81,6 @@ class ProfileItem extends Component {
                 </li>
               ))}
             </ul> */}
-
-            <Link to={`/profile/${profile.handle}`} className="btn">
-              Pogledaj profil
-            </Link>
           </div>
         </div>
       </div>

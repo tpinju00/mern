@@ -8,6 +8,7 @@ import ProfileCreds from "./ProfileCreds";
 import Spinner from "../common/Spinner";
 import { getProfileByHandle } from "../../actions/profileActions";
 import Posts from "../posts/Posts";
+import styles from "./styles.module.css";
 
 class Profile extends Component {
   componentDidMount() {
@@ -31,28 +32,24 @@ class Profile extends Component {
     } else {
       profileContent = (
         <div>
-          <div className="row">
-            <div className="col">
-              <Link to="/profiles">Back to profiles</Link>
-            </div>
-            <div className="col-md" /> <ProfileHeader profile={profile} />
-            <ProfileAbout profile={profile} />
-            <ProfileCreds
-              education={profile.education}
-              experience={profile.experience}
-            />
-            <Posts handle={profile.handle} />
-          </div>
+          <ProfileHeader profile={profile} />
+          <ProfileAbout profile={profile} />
+          <ProfileCreds
+            education={profile.education}
+            experience={profile.experience}
+          />
+          <Posts handle={profile.handle} />
         </div>
       );
     }
     return (
-      <div className="profile">
-        <div className="container">
-          <div className="row">
-            <div className="col">{profileContent}</div>
-          </div>
+      <div>
+        <div>
+          <Link to="/profiles" className={styles.backTo}>
+            Natrag na oglase
+          </Link>
         </div>
+        <div className>{profileContent}</div>
       </div>
     );
   }

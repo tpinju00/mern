@@ -15,33 +15,24 @@ class Landing extends Component {
       level: "",
       subjects: "",
       location: "",
-      skipMounting: 1
+      skipMounting: true
     };
 
     this.getFilterData = this.getFilterData.bind(this);
   }
 
   getFilterData(data) {
-    console.log("data", data);
+    //console.log("data", data);
     this.props.getProfiles(data);
   }
 
   render() {
-    console.log("peskoci", this.state.skipMounting);
+    //console.log("peskoci", this.state.skipMounting);
     return (
       <div className={styles.landing}>
         <div className>
           <div className>
             <div className>
-              <div className={styles.bothLinks}>
-                <Link to="/register" className={styles.LinkFrontPage}>
-                  Registracija
-                </Link>
-                <Link to="/login" className={styles.LinkFrontPage}>
-                  Prijava
-                </Link>
-              </div>
-
               {/* <Profiles
                 level={this.state.level}
                 subjects={this.state.subjects}
@@ -49,10 +40,11 @@ class Landing extends Component {
                 skipMounting
               /> */}
               <br />
-              <Profiles
+              {/* <Profiles
                 skipMounting={this.state.skipMounting}
                 sendData={this.getFilterData}
-              />
+              /> */}
+              <ProfileFilter />
             </div>
           </div>
         </div>

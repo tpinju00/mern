@@ -52,12 +52,14 @@
   align-items: center;
   flex: 1;
   background-color: white;
+  padding-left: 95px;
 }
 
 .ListGeneral {
   justify-content: space-between;
   align-items: center;
   display: inline;
+  padding-right: 100px;
 }
 
 .NavLink {
@@ -108,8 +110,4 @@
 .LinkFrontPage_active,
 .LinkFrontPage:hover {
   border-bottom: 2px solid white;
-}
-
-.bothLinks {
-  text-align: right;
 }

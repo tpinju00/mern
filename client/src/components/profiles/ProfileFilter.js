@@ -21,13 +21,6 @@ class ProfileFilter extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentDidMount() {
-    console.log("mount", this.props.newSkipMounting);
-    if (this.props.newSkipMounting) {
-      this.props.getProfiles();
-    }
-  }
-
   onSubmit(e) {
     e.preventDefault();
 
@@ -44,22 +37,7 @@ class ProfileFilter extends Component {
       filters.level = this.state.level;
     }
 
-    this.props.sendData(filters);
-
-    //this.props.getProfiles(filters);
-
-    //redirect to /profiles
-    //this.props.history.push("/profiles", { redirect: "submit" });
-
-    console.log("level", this.state.level);
-
-    this.setState({
-      level: this.state.level,
-      subjects: this.state.subjects,
-      location: this.state.location
-    });
-
-    let skipMounting = true;
+    //this.props.sendData(filters);
 
     this.props.history.push({
       pathname: "/profiles",

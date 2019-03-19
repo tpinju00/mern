@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import Moment from "react-moment";
+import styles from "./styles.module.css";
 
 class ProfileCreds extends Component {
   render() {
     const { experience, education } = this.props;
 
     const expItems = experience.map(exp => (
-      <li key={exp._id} className="list-group-item">
+      <li key={exp._id} className>
         <h4>{exp.company}</h4>
         <p>
           <Moment format="YYYY/MM/DD">{exp.from}</Moment> -
@@ -37,7 +38,7 @@ class ProfileCreds extends Component {
     ));
 
     const eduItems = education.map(edu => (
-      <li key={edu._id} className="list-group-item">
+      <li key={edu._id} className>
         <h4>{edu.school}</h4>
         <p>
           <Moment format="YYYY/MM/DD">{edu.from}</Moment> -
@@ -63,23 +64,25 @@ class ProfileCreds extends Component {
       </li>
     ));
     return (
-      <div className="row">
-        <div className="col-md-6">
-          <h3 className="text-center text-info">Experience</h3>
-          {expItems.length > 0 ? (
-            <ul className="list-group">{expItems}</ul>
-          ) : (
-            <p className="text-center">No Experience Listed</p>
-          )}
-        </div>
+      <div className={styles.profile}>
+        <div className={styles.profileThird}>
+          <div className={styles.sep1}>
+            <h3 className={styles.education}>Obrazovanje</h3>
+            {eduItems.length > 0 ? (
+              <ul className>{eduItems}</ul>
+            ) : (
+              <p className>Obrazovanje nije navedeno</p>
+            )}
+          </div>
 
-        <div className="col-md-6">
-          <h3 className="text-center text-info">Education</h3>
-          {eduItems.length > 0 ? (
-            <ul className="list-group">{eduItems}</ul>
-          ) : (
-            <p className="text-center">No Education Listed</p>
-          )}
+          <div className={styles.sep2}>
+            <h3 className={styles.experience}>Iskustvo</h3>
+            {expItems.length > 0 ? (
+              <ul className>{expItems}</ul>
+            ) : (
+              <p className>Iskustvo nije navedeno</p>
+            )}
+          </div>
         </div>
       </div>
     );

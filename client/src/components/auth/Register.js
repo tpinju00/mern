@@ -55,7 +55,7 @@ class Register extends Component {
         <div className>
           <div className>
             <div className={styles.mainForm}>
-              <h1>Registracija</h1>
+              <h1 className={styles.title}>Registracija</h1>
               <p className={styles.subtitle}>
                 Napravite Vaš račun na Repete.hr!
               </p>

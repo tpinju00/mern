@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import isEmpty from "../../validation/is-empty";
+import styles from "./styles.module.css";
 
 class ProfileAbout extends Component {
   render() {
@@ -10,33 +11,22 @@ class ProfileAbout extends Component {
 
     // Skill list
     const skills = profile.skills.map((skill, index) => (
-      <div key={index} className="p-3">
-        <i className="fa fa-check" />
+      <div key={index} className>
+        <i className />
         {skill}
       </div>
     ));
     return (
-      <div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card card-body bg-light mb-3">
-              <h3 class="text-center text-info">{firstName}'s Bio</h3>
-              <p class="lead">
-                {isEmpty(profile.bio) ? (
-                  <span>{firstName} doesn't have a bio.</span>
-                ) : (
-                  <spain>{profile.bio}</spain>
-                )}
-              </p>
-              <hr />
-              <h3 class="text-center text-info">Skill Set</h3>
-              <div class="row">
-                <div class="d-flex flex-wrap justify-content-center align-items-center">
-                  {skills}
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className={styles.profile}>
+        <div className={styles.profileSecond}>
+          <h3 className={styles.personBio}>Informacije o korisniku</h3>
+          <p>
+            {isEmpty(profile.bio) ? (
+              <span>{firstName} nema opis.</span>
+            ) : (
+              <spain>{profile.bio}</spain>
+            )}
+          </p>
         </div>
       </div>
     );

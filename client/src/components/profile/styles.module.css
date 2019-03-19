@@ -1,0 +1,80 @@
+.backTo {
+  color: #3c5a40;
+  font-size: 16px;
+  transition: all 0.25s linear;
+  overflow-x: hidden;
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 4px;
+  text-decoration: none;
+  padding-left: 210px;
+}
+
+.profilePicture {
+  max-width: 200px;
+  max-height: 200px;
+  min-width: 200px;
+  min-height: 200px;
+}
+
+.profile {
+  padding: 1px 1px 1px 1px;
+  margin: 10px 10px 10px 10px;
+  position: relative;
+  box-shadow: 0 1px 3px 0 rgba(63, 63, 68, 0.15),
+    0 0 0 1px rgba(63, 63, 68, 0.05);
+  margin: 20px 210px 0px 210px;
+}
+
+.profileFirst {
+  padding: 10px 10px 0px 10px;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+}
+
+.profileSecond {
+  padding: 10px 10px 10px 20px;
+}
+
+.profileThird {
+  padding: 10px 10px 10px 20px;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.separator1 {
+}
+.separator2 {
+  grid-column: 2 / span 3;
+}
+
+.separator3 {
+  text-align: center;
+}
+
+.personUserName {
+  color: #3c5a40;
+  font-weight: bold;
+  font-size: 34px;
+  text-transform: uppercase;
+}
+
+.personBio {
+  color: #3c5a40;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.education {
+  color: #3c5a40;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.experience {
+  color: #3c5a40;
+  font-weight: bold;
+  font-size: 20px;
+}
