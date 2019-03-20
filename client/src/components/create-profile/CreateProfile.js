@@ -8,6 +8,7 @@ import InputGroup from "../common/InputGroup";
 import SelectListGroup from "../common/SelectListGroup";
 import { createProfile } from "../../actions/profileActions";
 import axios from "axios";
+import Select from "react-select";
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -18,7 +19,6 @@ class CreateProfile extends Component {
       company: "",
       price: "",
       location: "",
-      subject: "",
       subjects: "",
       level: "",
       skills: "",
@@ -30,7 +30,9 @@ class CreateProfile extends Component {
       youtube: "",
       instagram: "",
       errors: {},
-      selectedFile: null
+      selectedFile: null,
+      selectedOption: null,
+      selectedValues: null
     };
 
     this.onChange = this.onChange.bind(this);
@@ -48,13 +50,18 @@ class CreateProfile extends Component {
 
     console.log("create profile", this.state.subjects);
 
+    console.log("TOMAS", this.state.selectedOption);
+    if (this.state.selectedOption) {
+      this.state.selectedValues = this.state.selectedOption.map(el => el.value);
+      console.log("DISCORD", this.state.selectedValues);
+    }
+
     const profileData = {
       handle: this.state.handle,
       company: this.state.company,
       price: this.state.price,
       location: this.state.location,
-      subject: this.state.subject,
-      subjects: this.state.subjects,
+      subjects: this.state.selectedValues,
       level: this.state.level,
       skills: this.state.skills,
       githubusername: this.state.githubusername,
@@ -98,9 +105,17 @@ class CreateProfile extends Component {
       .catch(error => {});
   };
 
+  handleChange = selectedOption => {
+    //const selectedValues = selectedOption.map(el => el.value);
+    //console.log(`Option selected:`, selectedOption[0].value);
+
+    this.setState({ selectedOption });
+  };
+
   render() {
     const { errors, displaySocialInputs } = this.state;
     const { profile } = this.props.profile;
+    const { selectedOption } = this.state;
 
     let socialInputs;
 
@@ -108,21 +123,30 @@ class CreateProfile extends Component {
       socialInputs = (
         <div>
           <InputGroup
-            placeholder="Twitter Profile URL"
-            name="twitter"
-            icon="fab fa-twitter"
-            value={this.state.twitter}
-            onChange={this.onChange}
-            error={errors.twitter}
-          />
-
-          <InputGroup
             placeholder="Facebook Page URL"
             name="facebook"
             icon="fab fa-facebook"
             value={this.state.facebook}
             onChange={this.onChange}
             error={errors.facebook}
+          />
+
+          <InputGroup
+            placeholder="Instagram Page URL"
+            name="instagram"
+            icon="fab fa-instagram"
+            value={this.state.instagram}
+            onChange={this.onChange}
+            error={errors.instagram}
+          />
+
+          <InputGroup
+            placeholder="Twitter Profile URL"
+            name="twitter"
+            icon="fab fa-twitter"
+            value={this.state.twitter}
+            onChange={this.onChange}
+            error={errors.twitter}
           />
 
           <InputGroup
@@ -141,15 +165,6 @@ class CreateProfile extends Component {
             value={this.state.youtube}
             onChange={this.onChange}
             error={errors.youtube}
-          />
-
-          <InputGroup
-            placeholder="Instagram Page URL"
-            name="instagram"
-            icon="fab fa-instagram"
-            value={this.state.instagram}
-            onChange={this.onChange}
-            error={errors.instagram}
           />
         </div>
       );
@@ -206,15 +221,13 @@ class CreateProfile extends Component {
                   error={errors.location}
                   info="Give us an idea of where you are located"
                 />
-                <SelectListGroup
-                  placeholder="Subject"
-                  name="subject"
-                  value={this.state.subject}
-                  onChange={this.onChange}
+                <Select
+                  value={selectedOption}
+                  onChange={this.handleChange}
                   options={optionsSubject}
-                  error={errors.subject}
-                  info="Give us an idea of where you are at in your career"
+                  isMulti={true}
                 />
+
                 <SelectListGroup
                   placeholder="Level"
                   name="level"

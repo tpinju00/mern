@@ -108,7 +108,7 @@ class ProfileFilter extends Component {
                 value={this.state.subjects}
                 onChange={this.onChange}
                 options={optionsSubject}
-                error={errors.subject}
+                error={errors.subjects}
                 className={styles.category}
               />
               <SelectListGroup

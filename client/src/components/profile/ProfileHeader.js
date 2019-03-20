@@ -34,9 +34,17 @@ class ProfileHeader extends Component {
             </p>
 
             <p>
-              {profile.subject} {profile.level}
+              {profile.subjects} {profile.level}
             </p>
-            <h3>OCJENA</h3>
+            <p>
+              {isEmpty(profile.totalRating) ? (
+                "Korisnika još nitko nije ocijenio"
+              ) : (
+                <span>
+                  {profile.totalRating + " je ukupan prosjek ratinga"}
+                </span>
+              )}{" "}
+            </p>
           </div>
 
           <div className={styles.separator3}>
@@ -45,14 +53,16 @@ class ProfileHeader extends Component {
                 <span>{profile.price + " Kuna po satu"}</span>
               )}
             </p>
-            <h3>DRUŠTVENE MREŽE</h3>
+            <h3>DRUŠTVENE MREŽE: </h3>
             {isEmpty(profile.social && profile.social.twitter) ? null : (
               <a className href={profile.social.twitter} target="_blank">
                 <i className />
               </a>
             )}
 
-            {isEmpty(profile.social && profile.social.facebook) ? null : (
+            {isEmpty(profile.social && profile.social.facebook) ? (
+              "Korisnik nije unio facebook profil"
+            ) : (
               <a className href={profile.social.facebook} target="_blank">
                 <i className />
               </a>

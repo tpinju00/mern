@@ -7,7 +7,6 @@ module.exports = function validateProfileInput(data) {
   data.handle = !isEmpty(data.handle) ? data.handle : "";
   data.company = !isEmpty(data.company) ? data.company : "";
   data.location = !isEmpty(data.location) ? data.location : "";
-  data.subject = !isEmpty(data.subject) ? data.subject : "";
 
   console.log("data subjects", data.subjects);
   console.log("length", data.subjects.length);
@@ -44,10 +43,6 @@ module.exports = function validateProfileInput(data) {
 
   if (Validator.isEmpty(data.level)) {
     errors.level = "Level  field is required";
-  }
-
-  if (Validator.isEmpty(data.subject)) {
-    errors.subject = "Subject  field is required";
   }
 
   if (!data.subjects) {

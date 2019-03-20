@@ -242,7 +242,6 @@ router.post(
     if (req.body.price) profileFields.price = req.body.price;
     if (req.body.location) profileFields.location = req.body.location;
     if (req.body.bio) profileFields.bio = req.body.bio;
-    if (req.body.subject) profileFields.subject = req.body.subject;
     if (req.body.subjects) profileFields.subjects = req.body.subjects;
     if (req.body.level) profileFields.level = req.body.level;
     if (req.body.githubusername)

@@ -17,7 +17,6 @@ class CreateProfile extends Component {
     this.state = {
       displaySocialInputs: false,
       handle: "",
-      subject: "",
       subjects: "",
       level: "",
       company: "",
@@ -60,7 +59,6 @@ class CreateProfile extends Component {
       profile.company = !isEmpty(profile.company) ? profile.company : "";
       profile.price = !isEmpty(profile.price) ? profile.price : "";
       profile.location = !isEmpty(profile.location) ? profile.location : "";
-      profile.subject = !isEmpty(profile.subject) ? profile.subject : "";
       profile.subjects = !isEmpty(profile.subjects) ? profile.subjects : "";
       profile.level = !isEmpty(profile.level) ? profile.level : "";
       profile.githubusername = !isEmpty(profile.githubusername)
@@ -90,7 +88,6 @@ class CreateProfile extends Component {
         company: profile.company,
         price: profile.price,
         location: profile.location,
-        subject: profile.subject,
         subjects: profile.subjects,
         level: profile.level,
         skills: skillsCSV,
@@ -119,7 +116,6 @@ class CreateProfile extends Component {
       company: this.state.company,
       price: this.state.price,
       location: this.state.location,
-      subject: this.state.subject,
       subjects: this.state.selectedValues,
       level: this.state.level,
       skills: this.state.skills,
@@ -183,21 +179,30 @@ class CreateProfile extends Component {
       socialInputs = (
         <div>
           <InputGroup
-            placeholder="Twitter Profile URL"
-            name="twitter"
-            icon="fab fa-twitter"
-            value={this.state.twitter}
-            onChange={this.onChange}
-            error={errors.twitter}
-          />
-
-          <InputGroup
             placeholder="Facebook Page URL"
             name="facebook"
             icon="fab fa-facebook"
             value={this.state.facebook}
             onChange={this.onChange}
             error={errors.facebook}
+          />
+
+          <InputGroup
+            placeholder="Instagram Page URL"
+            name="instagram"
+            icon="fab fa-instagram"
+            value={this.state.instagram}
+            onChange={this.onChange}
+            error={errors.instagram}
+          />
+
+          <InputGroup
+            placeholder="Twitter Profile URL"
+            name="twitter"
+            icon="fab fa-twitter"
+            value={this.state.twitter}
+            onChange={this.onChange}
+            error={errors.twitter}
           />
 
           <InputGroup
@@ -216,15 +221,6 @@ class CreateProfile extends Component {
             value={this.state.youtube}
             onChange={this.onChange}
             error={errors.youtube}
-          />
-
-          <InputGroup
-            placeholder="Instagram Page URL"
-            name="instagram"
-            icon="fab fa-instagram"
-            value={this.state.instagram}
-            onChange={this.onChange}
-            error={errors.instagram}
           />
         </div>
       );
@@ -281,15 +277,15 @@ class CreateProfile extends Component {
                   error={errors.location}
                   info="Odaberi lokaciju"
                 />
-                <SelectListGroup
-                  placeholder="Subject"
-                  name="subject"
-                  value={this.state.subject}
-                  onChange={this.onChange}
+
+                <Select
+                  placeholder="Subjects"
+                  value={selectedOption}
+                  onChange={this.handleChange}
                   options={optionsSubject}
-                  error={errors.subject}
-                  info="Odaberi predmete"
+                  isMulti={true}
                 />
+
                 <SelectListGroup
                   placeholder="Level"
                   name="level"
@@ -356,12 +352,7 @@ class CreateProfile extends Component {
                   <span className="text-muted">Optional</span>
                 </div>
                 {socialInputs}
-                <Select
-                  value={selectedOption}
-                  onChange={this.handleChange}
-                  options={optionsSubject}
-                  isMulti={true}
-                />
+
                 <input
                   type="submit"
                   value="Submit"

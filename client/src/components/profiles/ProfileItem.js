@@ -36,13 +36,21 @@ class ProfileItem extends Component {
             </p>
 
             <p>
-              {profile.subject} {profile.level}
+              {profile.subjects} {profile.level}
             </p>
           </div>
 
           <div className={styles.separator3}>
             <h4>Cijena i rating</h4>
-            <p>{profile.totalRating} </p>
+            <p>
+              {isEmpty(profile.totalRating) ? (
+                "Korisnika još nitko nije ocijenio"
+              ) : (
+                <span>
+                  {profile.totalRating + " je ukupan prosjek ratinga"}
+                </span>
+              )}{" "}
+            </p>
             <p>
               {isEmpty(profile.price) ? null : (
                 <span>{profile.price + " Kuna po satu"}</span>

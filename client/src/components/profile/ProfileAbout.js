@@ -24,7 +24,7 @@ class ProfileAbout extends Component {
             {isEmpty(profile.bio) ? (
               <span>{firstName} nema opis.</span>
             ) : (
-              <spain>{profile.bio}</spain>
+              <span>{profile.bio}</span>
             )}
           </p>
         </div>
