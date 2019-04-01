@@ -30,13 +30,14 @@ router.post("/register", (req, res) => {
 
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
-      errors.email = "Email already exists";
+      errors.email = "Email adresa je iskorištena";
       return res.status(400).json(errors);
     } else {
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        gdpr: req.body.gdpr
       });
 
       bcrypt.genSalt(10, (err, salt) => {
@@ -71,7 +72,7 @@ router.post("/login", (req, res) => {
   User.findOne({ email }).then(user => {
     //Check for user
     if (!user) {
-      errors.email = "User not found";
+      errors.email = "Korisnik nije pronađen";
       return res.status(404).json(errors);
     }
 

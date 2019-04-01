@@ -18,7 +18,7 @@ class CreateProfile extends Component {
       displaySocialInputs: false,
       handle: "",
       subjects: "",
-      level: "",
+      levels: "",
       company: "",
       price: "",
       location: "",
@@ -31,9 +31,7 @@ class CreateProfile extends Component {
       youtube: "",
       instagram: "",
       errors: {},
-      selectedFile: null,
-      selectedOption: null,
-      selectedValues: null
+      selectedFile: null
     };
 
     this.onChange = this.onChange.bind(this);
@@ -60,7 +58,7 @@ class CreateProfile extends Component {
       profile.price = !isEmpty(profile.price) ? profile.price : "";
       profile.location = !isEmpty(profile.location) ? profile.location : "";
       profile.subjects = !isEmpty(profile.subjects) ? profile.subjects : "";
-      profile.level = !isEmpty(profile.level) ? profile.level : "";
+      profile.levels = !isEmpty(profile.levels) ? profile.levels : "";
       profile.githubusername = !isEmpty(profile.githubusername)
         ? profile.githubusername
         : "";
@@ -89,7 +87,7 @@ class CreateProfile extends Component {
         price: profile.price,
         location: profile.location,
         subjects: profile.subjects,
-        level: profile.level,
+        levels: profile.levels,
         skills: skillsCSV,
         githubusername: profile.githubusername,
         bio: profile.bio,
@@ -105,19 +103,13 @@ class CreateProfile extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    console.log("TOMAS", this.state.selectedOption);
-    if (this.state.selectedOption) {
-      this.state.selectedValues = this.state.selectedOption.map(el => el.value);
-      console.log("DISCORD", this.state.selectedValues);
-    }
-
     const profileData = {
       handle: this.state.handle,
       company: this.state.company,
       price: this.state.price,
       location: this.state.location,
-      subjects: this.state.selectedValues,
-      level: this.state.level,
+      subjects: this.state.subjects && this.state.subjects.map(el => el.value),
+      levels: this.state.levels && this.state.levels.map(el => el.value),
       skills: this.state.skills,
       githubusername: this.state.githubusername,
       bio: this.state.bio,
@@ -160,18 +152,29 @@ class CreateProfile extends Component {
       .catch(error => {});
   };
 
-  handleChange = selectedOption => {
-    //const selectedValues = selectedOption.map(el => el.value);
-    //console.log(`Option selected:`, selectedOption[0].value);
+  handleChange = subjects => {
+    //const selectedValues = subjects.map(el => el.value);
+    //console.log(`Option selected:`, subjects[0].value);
+    if (subjects.length < 9) {
+      this.setState({ subjects });
+    } else {
+      console.log("Prekoracili ste broj dozvoljenih kategorija");
+    }
+  };
 
-    this.setState({ selectedOption });
+  handleLevelsChange = selectedLevels => {
+    if (selectedLevels.length < 9) {
+      this.setState({ levels: selectedLevels });
+      console.log("levels on change", this.state.levels);
+    } else {
+      console.log("Prekoracili ste broj dozvoljenih razina");
+    }
   };
 
   render() {
     const { errors, displaySocialInputs } = this.state;
     const { profile } = this.props.profile;
     console.log("IDIDI", profile);
-    const { selectedOption } = this.state;
 
     let socialInputs;
 
@@ -255,10 +258,10 @@ class CreateProfile extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <Link to="/dashboard" className="btn btn-light">
-                Go Back
+                Idi nazad
               </Link>
-              <h1 className="display-4 text-center">Edite Your Profile</h1>
-              <small className="d-block pb-3">* = required fields</small>
+              <h1 className="display-4 text-center">Uredi vlastiti profil</h1>
+              <small className="d-block pb-3">* = Obavezna polja</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="* Profile Handle"
@@ -280,20 +283,20 @@ class CreateProfile extends Component {
 
                 <Select
                   placeholder="Subjects"
-                  value={selectedOption}
+                  name="subjects"
+                  value={this.state.subjects}
                   onChange={this.handleChange}
                   options={optionsSubject}
                   isMulti={true}
                 />
 
-                <SelectListGroup
-                  placeholder="Level"
-                  name="level"
-                  value={this.state.level}
-                  onChange={this.onChange}
+                <Select
+                  placeholder="Levels"
+                  name="levels"
+                  value={this.state.levels}
+                  onChange={this.handleLevelsChange}
                   options={optionsLevel}
-                  error={errors.level}
-                  info="Odaberi level"
+                  isMulti={true}
                 />
 
                 <TextFieldGroup
@@ -347,9 +350,9 @@ class CreateProfile extends Component {
                     }}
                     className="btn btn-light"
                   >
-                    Add Social Network Links
+                    Dodaj linkove za društvene mreže
                   </button>
-                  <span className="text-muted">Optional</span>
+                  <span className="text-muted">Opcionalno</span>
                 </div>
                 {socialInputs}
 

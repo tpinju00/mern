@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
+var util = require("util");
 
 // Load Validation
 const validateProfileInput = require("../../validation/profile");
@@ -16,6 +17,8 @@ const User = require("../../models/User");
 
 /// Image upload
 const multer = require("multer");
+
+var PER_PAGE = 3;
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -55,11 +58,11 @@ router.post("/upload", upload.single("profileImage"), (req, res) => {
 
   Profile.findById(req.body.profileId)
     .then(profile => {
-      if (profile.picture) {
-        return res.status(400).json({
-          alreadhasapicture: "Please delete your current profile picture"
-        });
-      }
+      // if (profile.picture) {
+      //   return res.status(400).json({
+      //     alreadhasapicture: "Please delete your current profile picture"
+      //   });
+      // }
 
       profile.picture = profilePath;
 
@@ -101,6 +104,10 @@ router.get(
   }
 );
 
+function getPaginatedItems(items, offset) {
+  return items.slice(offset, offset + PER_PAGE);
+}
+
 // @route       GET api/profile/all
 // @description Get all profile
 // @access      Public
@@ -110,33 +117,69 @@ router.get("/all", (req, res) => {
   //console.log("res je:", res);
 
   //Object of all query parameters
-  const queries = req.query;
+  try {
+    const queries = req.query.filters ? JSON.parse(req.query.filters) : [];
 
-  //Save the query into a constant variable, so we can filter through it
-  const search = Profile.find().populate("user", ["name", "picture"]);
+    //Save the query into a constant variable, so we can filter through it
+    const search = Profile.find().populate("user", ["name", "picture"]);
+    console.log("quries", queries);
 
-  //console.log("search", search);
-
-  //Loop through all keys of the object
-  Object.keys(queries).forEach(key => {
-    // Apply a filter to the search for each key-value pair of the query Object
-    // This alters the search variable
-    console.log("key", key);
-    search.where(key, queries[key]);
-  });
-
-  //Return the final result, or a error
-  search
-    .then(profiles => {
-      if (!profiles) {
-        errors.noprofile = "There are no profiles for this user";
-        return res.status(404).json(errors);
-      }
-      res.json(profiles);
-    })
-    .catch(err =>
-      res.status(404).json({ profile: "There are no profiles for this user" })
+    Object.keys(queries).forEach(key =>
+      console.log(`Object.keys(queries)`, key, queries[key])
     );
+
+    Object.keys(queries).forEach(key => {
+      // Apply a filter to the search for each key-value pair of the query Object
+      // This alters the search variable
+      console.log("key", key);
+      search.where(key, queries[key]);
+    });
+
+    search
+      .then(profiles => {
+        if (!profiles) {
+          errors.noprofile = "There are no profiles for this user";
+          return res.status(404).json(errors);
+        }
+
+        const total_count = profiles.length;
+        console.log("ukupno profila", total_count);
+
+        //var items = profiles;
+        //console.log("items", items);
+
+        var offset = req.query.offset ? parseInt(req.query.offset, 10) : 0;
+        var nextOffset = offset + PER_PAGE;
+        var previousOffset = offset - PER_PAGE < 1 ? 0 : offset - PER_PAGE;
+
+        var meta = {
+          limit: PER_PAGE,
+          next: util.format("?limit=%s&offset=%s", PER_PAGE, nextOffset),
+          offset: req.query.offset,
+          previous: util.format(
+            "?limit=%s&offset=%s",
+            PER_PAGE,
+            previousOffset
+          ),
+          total_count: total_count
+        };
+        console.log("meta", meta);
+        //console.log("profiles before pag", profiles);
+        console.log("offset_LAST", offset);
+        var json = {
+          meta: meta,
+          profiles: getPaginatedItems(profiles, offset)
+        };
+
+        res.json(json);
+        //res.json(profiles);
+      })
+      .catch(err =>
+        res.status(404).json({ profile: "There are no profiles for this user" })
+      );
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // @route       GET api/profile/all/status/:status
@@ -243,7 +286,7 @@ router.post(
     if (req.body.location) profileFields.location = req.body.location;
     if (req.body.bio) profileFields.bio = req.body.bio;
     if (req.body.subjects) profileFields.subjects = req.body.subjects;
-    if (req.body.level) profileFields.level = req.body.level;
+    if (req.body.levels) profileFields.levels = req.body.levels;
     if (req.body.githubusername)
       profileFields.githubusername = req.body.githubusername;
 

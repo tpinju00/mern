@@ -19,10 +19,11 @@ const ProfileSchema = new Schema({
     required: true
   },
   subjects: {
-    type: [String]
+    type: [String],
+    required: true
   },
-  level: {
-    type: String,
+  levels: {
+    type: [String],
     required: true
   },
   company: {
@@ -32,8 +33,7 @@ const ProfileSchema = new Schema({
     type: Number
   },
   skills: {
-    type: [String],
-    required: true
+    type: [String]
   },
   bio: {
     type: String

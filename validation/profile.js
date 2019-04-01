@@ -9,7 +9,9 @@ module.exports = function validateProfileInput(data) {
   data.location = !isEmpty(data.location) ? data.location : "";
 
   console.log("data subjects", data.subjects);
-  console.log("length", data.subjects.length);
+  // if (data.subjects.length) {
+  //   console.log("length", data.subjects.length);
+  // }
 
   if (data.subjects && data.subjects.length) {
     data.subjects = data.subjects;
@@ -18,62 +20,69 @@ module.exports = function validateProfileInput(data) {
     data.subjects = "";
     console.log("empty");
   }
-  data.level = !isEmpty(data.level) ? data.level : "";
+
+  if (data.levels && data.levels.length) {
+    data.levels = data.levels;
+    console.log("not empty");
+  } else {
+    data.subjects = "";
+    console.log("empty");
+  }
   data.skills = !isEmpty(data.skills) ? data.skills : "";
 
   if (!Validator.isLength(data.handle, { min: 2, max: 40 })) {
-    errors.handle = "Handle needs to be between 2 and 4 characters";
+    errors.handle = "Nadimak mora biti između 2 i 40 karaktera";
   }
 
   if (Validator.isEmpty(data.handle)) {
-    errors.handle = "Profile handle is required";
+    errors.handle = "Unesite nadimak";
   }
 
   if (Validator.isEmpty(data.company)) {
-    errors.company = "Profile company is required";
+    errors.company = "Unesite radno mjesto";
   }
 
   if (!data.price) {
-    errors.price = "Profile price is required";
+    errors.price = "Unesite cijenu instrukcija";
   }
 
   if (Validator.isEmpty(data.location)) {
-    errors.location = "Location  field is required";
+    errors.location = "Unesite mjesto održavanja instrukcija";
   }
 
-  if (Validator.isEmpty(data.level)) {
-    errors.level = "Level  field is required";
+  if (!data.levels) {
+    errors.levels = "Unesite razinu koju podučavate";
   }
 
   if (!data.subjects) {
-    errors.subjects = "Subjects  field is required";
+    errors.subjects = "Unesite predmete koje podučavate";
   }
 
   if (Validator.isEmpty(data.skills)) {
-    errors.skills = "Skills field is required";
+    errors.skills = "Unesite vlastite vještine";
   }
 
   if (!isEmpty(data.facebook)) {
     if (!Validator.isURL(data.facebook)) {
-      errors.facebook = "Not a valid URL";
+      errors.facebook = "Neispravan format linka";
     }
   }
 
   if (!isEmpty(data.linkedin)) {
     if (!Validator.isURL(data.linkedin)) {
-      errors.linkedin = "Not a valid URL";
+      errors.linkedin = "Neispravan format linka";
     }
   }
 
   if (!isEmpty(data.youtube)) {
     if (!Validator.isURL(data.youtube)) {
-      errors.youtube = "Not a valid URL";
+      errors.youtube = "Neispravan format linka";
     }
   }
 
   if (!isEmpty(data.instagram)) {
     if (!Validator.isURL(data.instagram)) {
-      errors.instagram = "Not a valid URL";
+      errors.instagram = "Neispravan format linka";
     }
   }
 

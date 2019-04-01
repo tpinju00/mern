@@ -10,12 +10,12 @@ class ProfileAbout extends Component {
     const firstName = profile.user.name.trim().split(" ")[0];
 
     // Skill list
-    const skills = profile.skills.map((skill, index) => (
-      <div key={index} className>
-        <i className />
-        {skill}
-      </div>
-    ));
+    // const skills = profile.skills.map((skill, index) => (
+    //   <div key={index} className>
+    //     <i className />
+    //     {skill}
+    //   </div>
+    // ));
     return (
       <div className={styles.profile}>
         <div className={styles.profileSecond}>

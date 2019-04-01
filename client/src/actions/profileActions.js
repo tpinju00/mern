@@ -9,27 +9,6 @@ import {
   GET_PROFILES
 } from "./types";
 
-//post a picture
-export const postProfilePicture = (
-  selectedFile,
-  selectedFileName
-) => dispatch => {
-  dispatch(setProfileLoading());
-  const data = new FormData();
-  data.append("file", this.state.selectedFile, this.state.selectedFile.name);
-  axios
-    .post("api/profile/upload", {
-      onUploadProgress: ProgressEvent => {
-        this.setState({
-          loaded: (ProgressEvent.loaded / ProgressEvent.total) * 100
-        });
-      }
-    })
-    .then(res => {
-      console.log(res.statusText);
-    });
-};
-
 //get current profile
 export const getCurrentProfile = () => dispatch => {
   dispatch(setProfileLoading());
@@ -55,27 +34,56 @@ export const getCurrentProfile = () => dispatch => {
 //   skills: "CSS",
 //   status:"Developer"
 // }
-export const getProfiles = filters => dispatch => {
-  dispatch(setProfileLoading());
-  axios
-    .get("/api/profile/all", { params: filters })
-    .then(res =>
-      dispatch(
-        {
-          type: GET_PROFILES,
-          payload: res.data
-        },
-        console.log("glupsi:", res.data)
-      )
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_PROFILES,
-        payload: null
-      })
-    );
-};
+// export const getProfiles = filters => dispatch => {
+//   dispatch(setProfileLoading());
+//   axios
+//     .get("/api/profile/all", { params: filters })
+//     .then(res =>
+//       dispatch(
+//         {
+//           type: GET_PROFILES,
+//           payload: res.data
+//         },
+//         console.log("DATA LENGTH", res.data.length)
+//       )
+//     )
+//     .catch(err =>
+//       dispatch({
+//         type: GET_PROFILES,
+//         payload: null
+//       })
+//     );
+// };
 
+export const getProfiles = (filters, perPage, offset) => dispatch => {
+  return new Promise((resolve, reject) => {
+    dispatch(setProfileLoading());
+    console.log("axios offset", offset);
+    axios
+      .get("/api/profile/all", {
+        params: {
+          filters: filters,
+          limit: perPage,
+          offset: offset
+        }
+      })
+      .then(res =>
+        dispatch(
+          {
+            type: GET_PROFILES,
+            payload: res.data
+          },
+          resolve(res.data.length)
+        )
+      )
+      .catch(err =>
+        dispatch({
+          type: GET_PROFILES,
+          payload: null
+        })
+      );
+  });
+};
 //get profile by level
 export const getProfileByLevel = (level, history) => dispatch => {
   dispatch(setProfileLoading());
@@ -106,7 +114,7 @@ export const getProfileByStatus = (status, level, history) => dispatch => {
     .get(`api/profile/all/status/${status}`)
     .then(res => {
       //I need a Dinamic Url here for multiple choices, not just status and then many status options, but the "status=" part should be
-      history.push(`/profiles?` + "status=" + `${status}`);
+      history.push(`/profiles?status=${status}`);
       dispatch({
         type: GET_PROFILE,
         payload: res.data

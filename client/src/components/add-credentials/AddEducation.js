@@ -68,13 +68,15 @@ class AddEducation extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <Link to="/dashboard" className="btn btn-light">
-                Go Back
+                Idi nazad
               </Link>
-              <h1 className="display-4 text-center">Add education</h1>
+              <h1 className="display-4 text-center">
+                Dodaj podatke o obrazovanju
+              </h1>
               <p className="lead text-center">
-                Add any school that you have had in the past or current
+                Dodaj obrazovanje kroz koje si prošao/la
               </p>
-              <small className="d-block pb-3">* = required fields</small>
+              <small className="d-block pb-3">* = Obavezna polja</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="* school"
@@ -97,7 +99,7 @@ class AddEducation extends Component {
                   onChange={this.onChange}
                   error={errors.fieldofstudy}
                 />
-                <h6>From Date</h6>
+                <h6>Od</h6>
                 <TextFieldGroup
                   name="from"
                   type="date"
@@ -105,7 +107,7 @@ class AddEducation extends Component {
                   onChange={this.onChange}
                   error={errors.from}
                 />
-                <h6>To Date</h6>
+                <h6>Do</h6>
                 <TextFieldGroup
                   name="to"
                   type="date"

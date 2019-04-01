@@ -32,7 +32,7 @@ export const addPost = postData => dispatch => {
 
 // Add rating
 export const addRating = payload => dispatch => {
-  const { id, profileId, profileUserId, ratingNumber, handle } = payload;
+  const { id, profileId, profileUserId, ratingNumber } = payload;
   console.log("ididii", id);
   axios
     .post(`/api/profile/rating/${id}`, {
@@ -116,7 +116,7 @@ export const deletePost = id => dispatch => {
 
 // Add Like
 export const addLike = payload => dispatch => {
-  const { id, ratingNumber, handle } = payload;
+  const { id, ratingNumber } = payload;
   //console.log(payload);
   axios
     .post(`/api/posts/like/${id}`, { ratingNumber })

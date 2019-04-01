@@ -11,6 +11,7 @@ const InputGroup = ({
   type,
   onChange
 }) => {
+  console.log("error u input grupi", error);
   return (
     <div className="input-group mb-3">
       <div className="input-group-prepend">

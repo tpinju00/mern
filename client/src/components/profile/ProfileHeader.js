@@ -34,7 +34,7 @@ class ProfileHeader extends Component {
             </p>
 
             <p>
-              {profile.subjects} {profile.level}
+              {profile.subjects} {profile.leves}
             </p>
             <p>
               {isEmpty(profile.totalRating) ? (
@@ -55,7 +55,7 @@ class ProfileHeader extends Component {
             </p>
             <h3>DRUŠTVENE MREŽE: </h3>
             {isEmpty(profile.social && profile.social.twitter) ? null : (
-              <a className href={profile.social.twitter} target="_blank">
+              <a className href={profile.social.twitter} rel="noopener">
                 <i className />
               </a>
             )}
@@ -63,25 +63,25 @@ class ProfileHeader extends Component {
             {isEmpty(profile.social && profile.social.facebook) ? (
               "Korisnik nije unio facebook profil"
             ) : (
-              <a className href={profile.social.facebook} target="_blank">
+              <a className href={profile.social.facebook} rel="noopener">
                 <i className />
               </a>
             )}
 
             {isEmpty(profile.social && profile.social.linkedin) ? null : (
-              <a className href={profile.social.linkedin} target="_blank">
+              <a className href={profile.social.linkedin} rel="noopener">
                 <i className />
               </a>
             )}
 
             {isEmpty(profile.social && profile.social.youtube) ? null : (
-              <a className href={profile.social.youtube} target="_blank">
+              <a className href={profile.social.youtube} rel="noopener">
                 <i className />
               </a>
             )}
 
             {isEmpty(profile.social && profile.social.instagram) ? null : (
-              <a className href={profile.social.instagram} target="_blank">
+              <a className href={profile.social.instagram} rel="noopener">
                 <i className />
               </a>
             )}

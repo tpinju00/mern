@@ -43,9 +43,9 @@ class ProfileFilter extends Component {
     this.props.history.push({
       pathname: "/profiles",
       state: {
-        level: this.state.level,
-        subjects: this.state.subjects,
-        location: this.state.location,
+        // level: this.state.level,
+        // subjects: this.state.subjects,
+        // location: this.state.location,
         filters: filters
       }
     });
@@ -56,11 +56,7 @@ class ProfileFilter extends Component {
   }
 
   render() {
-    const { profiles, loading } = this.props.profile;
-    let profileItems;
-
     const { errors } = this.state;
-    const { filteredByStatus, filteredByLevel } = this.state;
     let profileStatusItems;
     let profileLevelItems;
 

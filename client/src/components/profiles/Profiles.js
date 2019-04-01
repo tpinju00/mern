@@ -12,30 +12,73 @@ import SelectListGroup from "../common/SelectListGroup";
 import isEmpty from "../../validation/is-empty";
 import { withRouter } from "react-router-dom";
 import styles from "./styles.module.css";
+import ReactPaginate from "react-paginate";
 
 class Profiles extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      level: "",
+      levels: "",
       subjects: "",
       location: "",
       filterParams: [],
-      errors: {}
+      errors: {},
+      pageCount: "",
+      perPage: ""
     };
 
     this.getFilterData = this.getFilterData.bind(this);
   }
 
   componentDidMount() {
+    //const history = createHistory();
+    //console.log("history", history);
+
     if (this.props.location.state) {
       console.log("filters iz stanja", this.props.location.state.filters);
-      this.props.getProfiles(this.props.location.state.filters);
+
+      // if (this.props.location.state.filters.location) {
+      //   this.setState({ location: this.props.location.state.filters.location });
+      // }
+
+      this.setState({ filterParams: this.props.location.state.filters }, () => {
+        console.log("offsetPOCETAK", this.state.filterParams);
+        this.props.getProfiles(
+          this.state.filterParams,
+          this.state.perPage,
+          this.state.offset
+        );
+      });
+
+      // this.props.getProfiles(this.props.location.state.filters);
     } else {
-      this.props.getProfiles();
+      this.setState({ filterParams: "" });
+      this.props.getProfiles().then(() => {
+        let numberOfPages = Math.ceil(this.props.profiles.meta.total_count / 3);
+        this.setState({ pageCount: numberOfPages });
+        console.log("page count", this.props.profiles.meta.total_count);
+      });
     }
   }
+
+  handlePageClick = data => {
+    var selected = data.selected;
+    console.log("selected", selected);
+    var perPage = 3;
+
+    var offset = Math.ceil(selected * perPage);
+    console.log("beginning of offset", offset);
+
+    this.setState({ offset: offset, perPage: perPage }, () => {
+      console.log("offsetPOCETAK", this.state.offset);
+      this.props.getProfiles(
+        this.state.filterParams,
+        this.state.perPage,
+        this.state.offset
+      );
+    });
+  };
 
   // componentDidUpdate(prevProps, prevState) {
   //   console.log("prev props", prevProps);
@@ -53,11 +96,11 @@ class Profiles extends Component {
   }
 
   render() {
-    const { profiles, loading } = this.props.profile;
+    const { profiles, profile, loading, json } = this.props;
     let profileItems;
 
     let newSkipMounting = 1;
-    console.log("props being called", this.props);
+    console.log("props being called", profiles.profiles);
     if (this.props.skipMounting) {
       newSkipMounting = 0;
     }
@@ -66,24 +109,39 @@ class Profiles extends Component {
 
     //console.log(profiles);
 
-    if (isEmpty(profiles) || loading) {
+    if (isEmpty(profiles.profiles) || loading) {
       //profileStatusItems = <Spinner />;
     } else {
       //console.log("filter", this.props.skipMounting);
-      if (isEmpty(profiles) || this.props.skipMounting) {
+      if (isEmpty(profiles.profiles) || this.props.skipMounting) {
         profileItems = <h1>No profiles</h1>;
       } else {
-        profileItems = profiles.map(profile => (
+        profileItems = profiles.profiles.map(profile => (
           <ProfileItem key={profile._id} profile={profile} />
         ));
       }
     }
+
+    //console.log("broj stranica", this.state.pageCount);
 
     return (
       <div className="profiles">
         <div className="container">
           <ProfileFilter newSkipMounting sendData={this.getFilterData} />
           {this.props.history.location.pathname === "/profiles" && profileItems}
+          <ReactPaginate
+            previousLabel={"previous"}
+            nextLabel={"next"}
+            breakLabel={"..."}
+            breakClassName={"break-me"}
+            pageCount={this.state.pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={this.handlePageClick}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+          />
         </div>
       </div>
     );
@@ -98,7 +156,8 @@ Profiles.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile.profile,
+  profiles: state.profile.profiles
 });
 
 export default connect(

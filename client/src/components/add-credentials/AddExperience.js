@@ -68,13 +68,13 @@ class AddExperience extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <Link to="/dashboard" className="btn btn-light">
-                Go Back
+                Idi nazad
               </Link>
-              <h1 className="display-4 text-center">Add Experience</h1>
+              <h1 className="display-4 text-center">Uredi iskustva</h1>
               <p className="lead text-center">
-                Add any job or position that you have had in the past or current
+                Dodaj posao ili poziciju koju si imao u prošlosti
               </p>
-              <small className="d-block pb-3">* = required fields</small>
+              <small className="d-block pb-3">* = Obavezna polja</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="* Company"
@@ -97,7 +97,7 @@ class AddExperience extends Component {
                   onChange={this.onChange}
                   error={errors.location}
                 />
-                <h6>From Date</h6>
+                <h6>Od</h6>
                 <TextFieldGroup
                   name="from"
                   type="date"
@@ -105,7 +105,7 @@ class AddExperience extends Component {
                   onChange={this.onChange}
                   error={errors.from}
                 />
-                <h6>To Date</h6>
+                <h6>Do</h6>
                 <TextFieldGroup
                   name="to"
                   type="date"
@@ -125,7 +125,7 @@ class AddExperience extends Component {
                     id="current"
                   />
                   <label htmlFor="current" className="form-check-label">
-                    Current Job
+                    Trenutni posao
                   </label>
                 </div>
                 <TextAreaFieldGroup

@@ -5,7 +5,6 @@ import PostForm from "./PostForm";
 import Spinner from "../common/Spinner";
 import { getPosts } from "../../actions/postActions";
 import PostFeed from "./PostFeed";
-import PostItem from "./PostItem";
 import PostRating from "./PostRating";
 
 class Posts extends Component {

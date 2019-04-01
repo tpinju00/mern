@@ -1,7 +1,7 @@
 {
-  "name": "devconnector",
+  "name": "Instrukcije",
   "version": "1.0.0",
-  "description": "Social network for developers",
+  "description": "Portal za instrukcije",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",

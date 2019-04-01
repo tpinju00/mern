@@ -10,35 +10,39 @@ module.exports = function validateRegisterInput(data) {
   data.password2 = !isEmpty(data.password2) ? data.password2 : "";
 
   if (!Validator.isLength(data.name, { min: 2, max: 30 })) {
-    errors.name = "Name must be between 2 and 30 characters";
+    errors.name = "Ime mora biti između 2 i 30 karaktera";
   }
 
   if (Validator.isEmpty(data.name)) {
-    errors.name = "Name field is required";
+    errors.name = "Unesite ime";
   }
 
   if (Validator.isEmpty(data.email)) {
-    errors.email = "Email field is required";
+    errors.email = "Unesite email adresu";
   }
 
   if (!Validator.isEmail(data.email)) {
-    errors.email = "Email is invalid";
+    errors.email = "Email adresa je neispravnog formata";
   }
 
   if (Validator.isEmpty(data.password)) {
-    errors.password = "Password field is required";
+    errors.password = "Unesite lozinku";
   }
 
   if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
-    errors.password = "Password must be at least 6 characters";
+    errors.password = "Lozinka mora imati najmanje 6 karaktera";
   }
 
   if (Validator.isEmpty(data.password2)) {
-    errors.password2 = "Confirm password field is required";
+    errors.password2 = "Unesite potvrdu lozinke";
   }
 
   if (!Validator.equals(data.password, data.password2)) {
-    errors.password2 = "Passwords must match";
+    errors.password2 = "Lozinke nisu jednake";
+  }
+
+  if (!data.gdpr) {
+    errors.gdpr = "Označite da ste upoznati s pravilima";
   }
 
   return {

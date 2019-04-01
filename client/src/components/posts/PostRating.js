@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
-import { Link } from "react-router-dom";
 import { addRating } from "../../actions/postActions";
 
 class PostRating extends Component {
@@ -34,7 +33,7 @@ class PostRating extends Component {
     }
   }
   render() {
-    const { post, auth, showActions } = this.props;
+    const { auth } = this.props;
     const { profile } = this.props.profile;
     console.log(auth.user.id);
     console.log("toams", profile.user._id);

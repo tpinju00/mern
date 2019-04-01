@@ -27,15 +27,14 @@ class Navbar extends Component {
           Profil
         </Link>
 
-        <a
-          href=""
+        <button
           onClick={this.onLogoutClick.bind(this)}
           className={styles.NavLink}
         >
-          <img src={user.picture} style={{ width: "25px" }} />
+          <img src={user.picture} style={{ width: "25px" }} alt="Profile" />
           {""}
           Odjava
-        </a>
+        </button>
       </div>
     );
 
