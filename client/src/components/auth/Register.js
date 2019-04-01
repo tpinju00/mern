@@ -77,7 +77,7 @@ class Register extends Component {
             <h1 className={styles.title}>Registracija</h1>
             <p className={styles.subtitle}>Napravite Vaš račun na Repete.hr!</p>
             <form
-              className={styles.formRegister}
+              className={styles.formGroup}
               noValidate
               onSubmit={this.onSubmit}
             >

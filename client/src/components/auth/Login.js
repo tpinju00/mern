@@ -58,7 +58,7 @@ class Login extends Component {
               <p className={styles.subtitle}>
                 Prijavite se u Vaš račun na Repete.hr!
               </p>
-              <form onSubmit={this.onSubmit}>
+              <form onSubmit={this.onSubmit} className={styles.formGroup}>
                 <TextFieldGroup
                   placeholder="E-mail adresa"
                   name="email"

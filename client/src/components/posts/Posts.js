@@ -30,8 +30,8 @@ class Posts extends Component {
             <div className={styles.grid}>
               <PostForm />
               <PostRating />
-              {postContent}
             </div>
+            {postContent}
           </div>
         </div>
       </div>

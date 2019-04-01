@@ -202,9 +202,10 @@ router.post(
 // @description Remove comm from post
 // @access      Private
 router.delete(
-  "/profile/:handle/comment/:id/:comment_id",
+  "/comment/:id/:comment_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log("req.params", req.params);
     Post.findById(req.params.id)
       .then(post => {
         // Check to see if comment exists

@@ -5,11 +5,14 @@ import { deleteComment } from "../../actions/postActions";
 
 class CommentItem extends Component {
   onDeleteClick(postId, commentId) {
+    console.log("pistID", postId);
+    console.log("commentId", commentId);
     this.props.deleteComment(postId, commentId);
   }
 
   render() {
-    const { comment, postId, auth } = this.props;
+    const { comment, postId, auth, profile } = this.props;
+    console.log("postIdRender", profile.user._id);
 
     return (
       <div className="card card-body mb-3">
