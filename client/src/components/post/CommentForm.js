@@ -58,6 +58,8 @@ class CommentForm extends Component {
                   value={this.state.text}
                   onChange={this.onChange}
                   error={errors.text}
+                  selected={true}
+                  className
                 />
               </div>
               <button type="submit" className="btn btn-dark">

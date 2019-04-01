@@ -5,6 +5,7 @@ import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addEducation } from "../../actions/profileActions";
+import styles from "./styles.module.css";
 
 class AddEducation extends Component {
   constructor(props) {
@@ -63,51 +64,59 @@ class AddEducation extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="add-education">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <Link to="/dashboard" className="btn btn-light">
-                Idi nazad
+      <div className>
+        <div className>
+          <div className>
+            <div className>
+              <Link to="/dashboard" className={styles.backTo}>
+                Natrag
               </Link>
-              <h1 className="display-4 text-center">
-                Dodaj podatke o obrazovanju
-              </h1>
-              <p className="lead text-center">
-                Dodaj obrazovanje kroz koje si prošao/la
+              <h1 className={styles.title}>Dodajte obrazovanje</h1>
+              <p className={styles.belowText}>
+                Dodajte obrazovanje koje ste do sada stekli ili trenutno stičete
               </p>
-              <small className="d-block pb-3">* = Obavezna polja</small>
+              <small className={styles.requiredFields}>
+                * = obavezna polja
+              </small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
-                  placeholder="* school"
+                  placeholder="* Škola"
                   name="school"
                   value={this.state.school}
                   onChange={this.onChange}
                   error={errors.school}
+                  selected={true}
+                  className
                 />
                 <TextFieldGroup
-                  placeholder="* Job degree"
+                  placeholder="* Stečeni naslov"
                   name="degree"
                   value={this.state.degree}
                   onChange={this.onChange}
                   error={errors.degree}
+                  selected={true}
+                  className
                 />
                 <TextFieldGroup
-                  placeholder="* Field of study"
+                  placeholder="* Polje obrazovanja"
                   name="fieldofstudy"
                   value={this.state.fieldofstudy}
                   onChange={this.onChange}
                   error={errors.fieldofstudy}
+                  selected={true}
+                  className
                 />
-                <h6>Od</h6>
+                <h6>Datum početka</h6>
                 <TextFieldGroup
                   name="from"
                   type="date"
                   value={this.state.from}
                   onChange={this.onChange}
                   error={errors.from}
+                  selected={true}
+                  className
                 />
-                <h6>Do</h6>
+                <h6>Datum kraja</h6>
                 <TextFieldGroup
                   name="to"
                   type="date"
@@ -115,34 +124,34 @@ class AddEducation extends Component {
                   onChange={this.onChange}
                   error={errors.to}
                   disabled={this.state.disabled ? "disabled" : ""}
+                  selected={true}
+                  className
                 />
-                <div className="form-check mb-4">
+                <div className>
                   <input
                     type="checkbox"
-                    className="form-check-input"
+                    className
                     name="current"
                     value={this.state.current}
                     checked={this.state.current}
                     onChange={this.onCheck}
                     id="current"
                   />
-                  <label htmlFor="current" className="form-check-label">
-                    Current School
+                  <label htmlFor="current" className>
+                    Trenutno obrazovanje
                   </label>
                 </div>
                 <TextAreaFieldGroup
-                  placeholder="Program Description"
+                  placeholder="Opis programa"
                   name="description"
                   value={this.state.description}
                   onChange={this.onChange}
                   error={errors.description}
-                  info="Tell us about the program you were in"
+                  info="Recite nam nešto o vašem programu obrazovanja"
+                  selected={true}
+                  className
                 />
-                <input
-                  type="submit"
-                  value="Submit"
-                  className="btn btn-info btn-block mt-4"
-                />
+                <input type="submit" value="Potvrdi" className />
               </form>
             </div>
           </div>

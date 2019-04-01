@@ -1,0 +1,35 @@
+.backTo {
+  color: #3c5a40;
+  font-size: 16px;
+  transition: all 0.25s linear;
+  overflow-x: hidden;
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 4px;
+  text-decoration: none;
+  padding-left: 210px;
+}
+
+.title {
+  font-size: 36px;
+  margin-top: 40px;
+  margin-left: 210px;
+  font-weight: bold;
+  color: #3c5a40;
+}
+
+.belowText {
+  font-size: 20px;
+  margin-top: 10px;
+  margin-left: 210px;
+  color: #3c5a40;
+}
+
+.requiredFields {
+  text-decoration: none;
+  color: #3c5a40;
+  margin-left: 210px;
+  font-size: 16px;
+}

@@ -8,10 +8,8 @@ import {
   getProfileByStatus,
   getProfileByLevel
 } from "../../actions/profileActions";
-import SelectListGroup from "../common/SelectListGroup";
 import isEmpty from "../../validation/is-empty";
 import { withRouter } from "react-router-dom";
-import styles from "./styles.module.css";
 import ReactPaginate from "react-paginate";
 
 class Profiles extends Component {
@@ -96,14 +94,8 @@ class Profiles extends Component {
   }
 
   render() {
-    const { profiles, profile, loading, json } = this.props;
+    const { profiles, loading } = this.props;
     let profileItems;
-
-    let newSkipMounting = 1;
-    console.log("props being called", profiles.profiles);
-    if (this.props.skipMounting) {
-      newSkipMounting = 0;
-    }
 
     //console.log("PRESKOCI2", newSkipMounting);
 

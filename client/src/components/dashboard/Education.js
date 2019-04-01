@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Moment from "react-moment";
 import { deleteEducation } from "../../actions/profileActions";
+import styles from "./styles.module.css";
 
 class Education extends Component {
   onDeleteClick(id) {
@@ -22,25 +23,27 @@ class Education extends Component {
           )}
         </td>
         <td>
-          <button onClick={this.onDeleteClick.bind(this, edu._id)}>
-            Delete
+          <button
+            onClick={this.onDeleteClick.bind(this, edu._id)}
+            className={styles.deleteButton}
+          >
+            Izbriši
           </button>
         </td>
       </tr>
     ));
     return (
       <div>
-        <h4>education Credentials</h4>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>School</th>
-              <th>Degree</th>
-              <th>Years</th>
-              <th />
-            </tr>
-            {education}
-          </thead>
+        <h4 className={styles.semiTitle}>Informacije o obrazovanju</h4>
+        <table className={styles.allInfo}>
+          <div>
+            <div className={styles.semiCategories}>
+              <th>Škola</th>
+              <th>Stečeni naslov</th>
+              <th>Godine</th>
+            </div>
+            <div className={styles.semiCategories2}>{education}</div>
+          </div>
         </table>
       </div>
     );

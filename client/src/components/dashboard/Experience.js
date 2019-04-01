@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Moment from "react-moment";
 import { deleteExperience } from "../../actions/profileActions";
+import styles from "./styles.module.css";
 
 class Experience extends Component {
   onDeleteClick(id) {
@@ -22,25 +23,27 @@ class Experience extends Component {
           )}
         </td>
         <td>
-          <button onClick={this.onDeleteClick.bind(this, exp._id)}>
-            Delete
+          <button
+            onClick={this.onDeleteClick.bind(this, exp._id)}
+            className={styles.deleteButton}
+          >
+            Izbriši
           </button>
         </td>
       </tr>
     ));
     return (
       <div>
-        <h4>Experience Credentials</h4>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Company</th>
-              <th>Title</th>
-              <th>Years</th>
-              <th />
-            </tr>
-            {experience}
-          </thead>
+        <h4 className={styles.semiTitle}>Informacije o iskustvu</h4>
+        <table className={styles.allInfo}>
+          <div>
+            <div className={styles.semiCategories}>
+              <th>Tvrtka</th>
+              <th>Naziv</th>
+              <th>Godine</th>
+            </div>
+            <div className={styles.semiCategories2}>{experience}</div>
+          </div>
         </table>
       </div>
     );

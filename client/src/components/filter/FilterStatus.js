@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getProfileByStatus } from "../../actions/profileActions";
-import SelectListGroup from "../common/SelectListGroup";
 import Spinner from "../common/Spinner";
 import ProfileItem from "../profiles/ProfileItem";
 

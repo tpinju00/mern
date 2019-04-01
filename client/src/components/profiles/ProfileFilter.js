@@ -88,7 +88,7 @@ class ProfileFilter extends Component {
           <h1 className={styles.title}>Repete.hr</h1>
           <p className={styles.subtitle}>Pronađi najbolje repeticije</p>
           <form onSubmit={this.onSubmit}>
-            <div className={styles.formFP}>
+            <div className={styles.categoriesFP}>
               <SelectListGroup
                 placeholder="Location"
                 name="location"

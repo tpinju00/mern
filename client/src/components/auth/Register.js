@@ -87,6 +87,8 @@ class Register extends Component {
                 value={this.state.name}
                 onChange={this.onChange}
                 error={errors.name}
+                selected={true}
+                className={styles.signUpFields}
               />
               <TextFieldGroup
                 placeholder="E-mail adresa"
@@ -95,6 +97,8 @@ class Register extends Component {
                 value={this.state.email}
                 onChange={this.onChange}
                 error={errors.email}
+                selected={true}
+                className={styles.signUpFields}
               />
               <TextFieldGroup
                 placeholder="Lozinka"
@@ -103,6 +107,8 @@ class Register extends Component {
                 value={this.state.password}
                 onChange={this.onChange}
                 error={errors.password}
+                selected={true}
+                className={styles.signUpFields}
               />
               <TextFieldGroup
                 placeholder="Potvrda lozinke"
@@ -111,6 +117,8 @@ class Register extends Component {
                 value={this.state.password2}
                 onChange={this.onChange}
                 error={errors.password2}
+                selected={true}
+                className={styles.signUpFields}
               />
               <input
                 type="checkbox"

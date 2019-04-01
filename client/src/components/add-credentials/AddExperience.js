@@ -5,6 +5,7 @@ import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addExperience } from "../../actions/profileActions";
+import styles from "./styles.module.css";
 
 class AddExperience extends Component {
   constructor(props) {
@@ -63,49 +64,60 @@ class AddExperience extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="add-experience">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <Link to="/dashboard" className="btn btn-light">
-                Idi nazad
+      <div className>
+        <div className>
+          <div className>
+            <div className>
+              <Link to="/dashboard" className={styles.backTo}>
+                Natrag
               </Link>
-              <h1 className="display-4 text-center">Uredi iskustva</h1>
-              <p className="lead text-center">
-                Dodaj posao ili poziciju koju si imao u prošlosti
+              <h1 className={styles.title}>Dodajte iskustvo</h1>
+              <p className={styles.belowText}>
+                Dodajte poslove i pozicije koje ste imali u prošlosti ili
+                trenutno imate
               </p>
-              <small className="d-block pb-3">* = Obavezna polja</small>
+              <small className={styles.requiredFields}>
+                * = obavezna polja
+              </small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
-                  placeholder="* Company"
+                  placeholder="* Tvrtka"
                   name="company"
                   value={this.state.company}
                   onChange={this.onChange}
                   error={errors.company}
+                  selected={true}
+                  className
                 />
                 <TextFieldGroup
-                  placeholder="* Job Title"
+                  placeholder="* Naziv"
                   name="title"
                   value={this.state.title}
                   onChange={this.onChange}
                   error={errors.title}
+                  selected={true}
+                  className
                 />
                 <TextFieldGroup
-                  placeholder="Location"
+                  placeholder="Lokacija"
                   name="location"
                   value={this.state.location}
                   onChange={this.onChange}
                   error={errors.location}
+                  selected={true}
+                  className
                 />
-                <h6>Od</h6>
+                <h6>Datum početka</h6>
                 <TextFieldGroup
                   name="from"
                   type="date"
                   value={this.state.from}
                   onChange={this.onChange}
                   error={errors.from}
+                  selected={true}
+                  className
                 />
-                <h6>Do</h6>
+                <h6>Datum kraja</h6>
                 <TextFieldGroup
                   name="to"
                   type="date"
@@ -113,34 +125,34 @@ class AddExperience extends Component {
                   onChange={this.onChange}
                   error={errors.to}
                   disabled={this.state.disabled ? "disabled" : ""}
+                  selected={true}
+                  className
                 />
-                <div className="form-check mb-4">
+                <div className>
                   <input
                     type="checkbox"
-                    className="form-check-input"
+                    className
                     name="current"
                     value={this.state.current}
                     checked={this.state.current}
                     onChange={this.onCheck}
                     id="current"
                   />
-                  <label htmlFor="current" className="form-check-label">
+                  <label htmlFor="current" className>
                     Trenutni posao
                   </label>
                 </div>
                 <TextAreaFieldGroup
-                  placeholder="Job Description"
+                  placeholder="Opis posla"
                   name="description"
                   value={this.state.description}
                   onChange={this.onChange}
                   error={errors.description}
-                  info="Tell us about the the position"
+                  info="Recite nam nešto o vašoj trenutnoj poziciji"
+                  selected={true}
+                  className
                 />
-                <input
-                  type="submit"
-                  value="Submit"
-                  className="btn btn-info btn-block mt-4"
-                />
+                <input type="submit" value="Potvrdi" className />
               </form>
             </div>
           </div>

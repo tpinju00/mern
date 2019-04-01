@@ -1,0 +1,95 @@
+.title {
+  font-size: 36px;
+  margin-top: 40px;
+  margin-left: 210px;
+  font-weight: bold;
+  color: #3c5a40;
+}
+
+.belowText {
+  font-size: 20px;
+  margin-top: 10px;
+  margin-left: 210px;
+  color: #3c5a40;
+}
+
+.userName {
+  text-decoration: none;
+  color: #3c5a40;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.makeButton {
+  color: white;
+  background-color: rgb(192, 25, 25);
+  font-size: 16px;
+  padding: 8px;
+  transition: all 0.25s linear;
+  overflow-x: hidden;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: none;
+  margin-left: 210px;
+}
+
+.deleteButton {
+  color: white;
+  background-color: rgb(192, 25, 25);
+  font-size: 16px;
+  padding: 8px;
+  transition: all 0.25s linear;
+  overflow-x: hidden;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: none;
+  margin-left: 210px;
+}
+
+.profileAct {
+  color: #3c5a40;
+  background-color: rgb(218, 212, 212);
+  border: none;
+  padding: 6px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.allAct {
+  margin-left: 210px;
+}
+
+.semiTitle {
+  font-size: 22px;
+  margin-left: 210px;
+  font-weight: bold;
+  color: #3c5a40;
+  border-bottom: solid 1px #dfe3e8;
+}
+
+.allInfo {
+  margin-left: 210px;
+}
+
+.semiCategories {
+  font-size: 16px;
+  color: #3c5a40;
+  border-bottom: solid 1px #dfe3e8;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  text-align: left;
+}
+
+.semiCategories2 {
+  font-size: 16px;
+  color: #3c5a40;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  text-align: left;
+}

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import { addPost } from "../../actions/postActions";
+import styles from "./styles.module.css";
 
 class PostForm extends Component {
   constructor(props) {
@@ -47,22 +48,24 @@ class PostForm extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="post-form mb-3">
-        <div className="card card-info">
-          <div className="card-header bg-info text-white">Say Something...</div>
-          <div className="card-body">
+      <div className>
+        <div className={styles.profileFourth}>
+          <div className={styles.saySomething}>Reci nešto o instruktoru:</div>
+          <div className>
             <form onSubmit={this.onSubmit}>
-              <div className="form-group">
+              <div>
                 <TextAreaFieldGroup
-                  placeholder="Create a post"
+                  placeholder="Unesi komentar"
                   name="text"
                   value={this.state.text}
                   onChange={this.onChange}
                   error={errors.text}
+                  selected={true}
+                  className={styles.formGroup}
                 />
               </div>
-              <button type="submit" className="btn btn-dark">
-                Submit
+              <button type="submit" className={styles.submitButton}>
+                Potvrdi
               </button>
             </form>
           </div>

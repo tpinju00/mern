@@ -66,6 +66,8 @@ class Login extends Component {
                   value={this.state.email}
                   onChange={this.onChange}
                   error={errors.email}
+                  selected={true}
+                  className={styles.signUpFields}
                 />
 
                 <TextFieldGroup
@@ -75,6 +77,8 @@ class Login extends Component {
                   value={this.state.password}
                   onChange={this.onChange}
                   error={errors.password}
+                  selected={true}
+                  className={styles.signUpFields}
                 />
                 <input
                   type="submit"

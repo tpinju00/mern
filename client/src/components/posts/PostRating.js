@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import { addRating } from "../../actions/postActions";
+import styles from "./styles.module.css";
 
 class PostRating extends Component {
   onDeleteClick(id) {
@@ -36,10 +37,10 @@ class PostRating extends Component {
     const { auth } = this.props;
     const { profile } = this.props.profile;
     console.log(auth.user.id);
-    console.log("toams", profile.user._id);
+    console.log("tomas", profile.user._id);
 
     return (
-      <div>
+      <div className={styles.rate}>
         <button
           onClick={() =>
             this.onLikeClick({
@@ -49,11 +50,14 @@ class PostRating extends Component {
               ratingNumber: 1
             })
           }
-          type="button"
-          className="btn btn-light mr-1"
+          className={styles.rate}
+          id="star1"
+          value="1"
         >
-          <i
-            className={classnames("fas fa-star", {
+          <label
+            for="star1"
+            title="text"
+            className={classnames({
               "text-info": this.findUserLike(profile.ratings)
             })}
           />
@@ -67,11 +71,14 @@ class PostRating extends Component {
               ratingNumber: 2
             })
           }
-          type="button"
-          className="btn btn-light mr-1"
+          className={styles.rate}
+          id="star2"
+          value="2"
         >
-          <i
-            className={classnames("fas fa-star", {
+          <label
+            for="star2"
+            title="text"
+            className={classnames({
               "text-info": this.findUserLike(profile.ratings)
             })}
           />
@@ -85,11 +92,14 @@ class PostRating extends Component {
               ratingNumber: 3
             })
           }
-          type="button"
-          className="btn btn-light mr-1"
+          className={styles.rate}
+          id="star3"
+          value="3"
         >
-          <i
-            className={classnames("fas fa-star", {
+          <label
+            for="star3"
+            title="text"
+            className={classnames({
               "text-info": this.findUserLike(profile.ratings)
             })}
           />
@@ -103,17 +113,18 @@ class PostRating extends Component {
               ratingNumber: 4
             })
           }
-          type="button"
-          className="btn btn-light mr-1"
+          className={styles.rate}
+          id="star4"
+          value="4"
         >
-          <i
-            className={classnames("fas fa-star", {
+          <label
+            for="star4"
+            title="text"
+            className={classnames({
               "text-info": this.findUserLike(profile.ratings)
             })}
           />
-          <span className="badge badge-light">
-            {profile.ratings.ratingNumber}
-          </span>
+          <span>{profile.ratings.ratingNumber}</span>
         </button>
         <button
           onClick={() =>
@@ -124,16 +135,19 @@ class PostRating extends Component {
               ratingNumber: 5
             })
           }
-          type="button"
-          className="btn btn-light mr-1"
+          className={styles.rate}
+          id="star5"
+          value="5"
         >
-          <i
-            className={classnames("fas fa-star", {
+          <label
+            for="star5"
+            title="text"
+            className={classnames({
               "text-info": this.findUserLike(profile.ratings)
             })}
           />
         </button>
-        <span className="badge badge-light">{profile.totalRating}</span>
+        <span className={styles.totalNumRating}>{profile.totalRating}</span>
       </div>
     );
   }

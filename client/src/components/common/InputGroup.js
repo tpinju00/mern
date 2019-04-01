@@ -1,9 +1,10 @@
 import React from "react";
-import classnames from "classnames";
 import PropTypes from "prop-types";
 
 const InputGroup = ({
   name,
+  selected,
+  className = "",
   placeholder,
   value,
   error,
@@ -12,23 +13,22 @@ const InputGroup = ({
   onChange
 }) => {
   console.log("error u input grupi", error);
+  const isSelected = selected === value ? "selected" : "";
   return (
-    <div className="input-group mb-3">
-      <div className="input-group-prepend">
-        <span className="input-group-text">
+    <div className>
+      <div className>
+        <span className>
           <i className={icon} />
         </span>
       </div>
       <input
-        className={classnames("form-control form-control-lg", {
-          "is-invalid": error
-        })}
+        className={`c-fieldFour u-x1of1 ${isSelected} ${className}`}
         placeholder={placeholder}
         name={name}
         value={value}
         onChange={onChange}
       />
-      {error && <div className="invalid-feedback">{error}</div>}
+      {error && <div>{error}</div>}
     </div>
   );
 };

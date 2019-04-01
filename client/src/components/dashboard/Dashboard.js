@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import ProfileActions from "../dashboard/ProfileActions";
 import Experience from "./Experience";
 import Education from "./Education";
+import styles from "./styles.module.css";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -29,9 +30,15 @@ class Dashboard extends Component {
       if (Object.keys(profile).length > 0) {
         dashobardContent = (
           <div>
-            <p className="lead text-muted">
-              Welcome{" "}
-              <Link to={`/profile/${profile.handle}`}> {user.name}</Link>
+            <p className={styles.belowText}>
+              Dobrodošao/la{" "}
+              <Link
+                to={`/profile/${profile.handle}`}
+                className={styles.userName}
+              >
+                {" "}
+                {user.name}
+              </Link>
             </p>
             <ProfileActions />
             <Experience experience={profile.experience} />
@@ -39,9 +46,9 @@ class Dashboard extends Component {
             <div style={{ marginBottom: "60px" }} />
             <button
               onClick={this.onDeleteClick.bind(this)}
-              className="btn btn-danger"
+              className={styles.deleteButton}
             >
-              Delete My Account
+              Izbriši moj račun
             </button>
           </div>
         );
@@ -49,19 +56,21 @@ class Dashboard extends Component {
         // User is logged in but has no profile
         dashobardContent = (
           <div>
-            <p className="lead text-muted">Welcome {user.name}</p>
-            <p> You have not yet setup a profile, please add info.</p>
-            <Link to="/create-profile">Create profile</Link>
+            <p className={styles.belowText}>Dobrodošao/la {user.name}</p>
+            <p className={styles.belowText}> Još niste napravili vaš profil.</p>
+            <Link to="/create-profile" className={styles.makeButton}>
+              Napravi profil
+            </Link>
           </div>
         );
       }
     }
     return (
-      <div className="dashboard">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h1 className="display-4">Dashboard</h1>
+      <div className>
+        <div className>
+          <div className>
+            <div className>
+              <h1 className={styles.title}>Profil</h1>
               {dashobardContent}
             </div>
           </div>

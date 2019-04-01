@@ -6,6 +6,7 @@ import Spinner from "../common/Spinner";
 import { getPosts } from "../../actions/postActions";
 import PostFeed from "./PostFeed";
 import PostRating from "./PostRating";
+import styles from "./styles.module.css";
 
 class Posts extends Component {
   componentDidMount() {
@@ -23,10 +24,10 @@ class Posts extends Component {
     }
 
     return (
-      <div className="feed">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
+      <div>
+        <div>
+          <div className={styles.profile}>
+            <div className={styles.grid}>
               <PostForm />
               <PostRating />
               {postContent}

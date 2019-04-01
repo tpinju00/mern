@@ -111,6 +111,29 @@ class CreateProfile extends Component {
     }
   };
 
+  // Select options for status
+  optionsSubject = [
+    { label: "* Odaberite predmete", value: 0 },
+    { label: "Matematika", value: "Matematika" },
+    { label: "Hrvatski", value: "Hrvatski" },
+    { label: "Seminari", value: "Seminari" }
+  ];
+
+  optionsLevel = [
+    { label: "* Odaberi svoj nivo podučavanja", value: 0 },
+    { label: "Predškolski", value: "Predškolski" },
+    { label: "Osnovnoškolski", value: "Osnovnoškolski" },
+    { label: "Srednjoškolski", value: "Srednjoškolski" },
+    { label: "Fakultet", value: "Fakultet" }
+  ];
+
+  optionsLocation = [
+    { label: "* Odaberite svoj grad", value: 0 },
+    { label: "Split", value: "Split" },
+    { label: "Zagreb", value: "Zagreb" },
+    { label: "Osijek", value: "Osijek" }
+  ];
+
   render() {
     const { errors, displaySocialInputs } = this.state;
     const { profile } = this.props.profile;
@@ -121,86 +144,71 @@ class CreateProfile extends Component {
       socialInputs = (
         <div>
           <InputGroup
-            placeholder="Facebook Page URL"
+            placeholder="Link na Facebook profil"
             name="facebook"
             icon="fab fa-facebook"
             value={this.state.facebook}
             onChange={this.onChange}
             error={errors.facebook}
+            selected={true}
+            className
           />
 
           <InputGroup
-            placeholder="Instagram Page URL"
+            placeholder="Link na Instagram profil"
             name="instagram"
             icon="fab fa-instagram"
             value={this.state.instagram}
             onChange={this.onChange}
             error={errors.instagram}
+            selected={true}
+            className
           />
 
           <InputGroup
-            placeholder="Twitter Profile URL"
+            placeholder="Link na Twitter profil"
             name="twitter"
             icon="fab fa-twitter"
             value={this.state.twitter}
             onChange={this.onChange}
             error={errors.twitter}
+            selected={true}
+            className
           />
 
           <InputGroup
-            placeholder="Linkedin Profile URL"
+            placeholder="Link na LinkedIN profil"
             name="linkedin"
             icon="fab fa-linkedin"
             value={this.state.linkedin}
             onChange={this.onChange}
             error={errors.linkedin}
+            selected={true}
+            className
           />
 
           <InputGroup
-            placeholder="YouTube Channel URL"
+            placeholder="Link na Youtube kanal"
             name="youtube"
             icon="fab fa-youtube"
             value={this.state.youtube}
             onChange={this.onChange}
             error={errors.youtube}
+            selected={true}
+            className
           />
         </div>
       );
     }
 
-    // Select options for status
-    const optionsSubject = [
-      { label: "* Odaberite predmete", value: 0 },
-      { label: "Matematika", value: "Matematika" },
-      { label: "Hrvatski", value: "Hrvatski" },
-      { label: "Seminari", value: "Seminari" }
-    ];
-
-    const optionsLevel = [
-      { label: "* Odaberi svoj nivo podučavanja", value: 0 },
-      { label: "Predškolski", value: "Predškolski" },
-      { label: "Osnovnoškolski", value: "Osnovnoškolski" },
-      { label: "Srednjoškolski", value: "Srednjoškolski" },
-      { label: "Fakultet", value: "Fakultet" }
-    ];
-
-    const optionsLocation = [
-      { label: "* Odaberite svoj grad", value: 0 },
-      { label: "Split", value: "Split" },
-      { label: "Zagreb", value: "Zagreb" },
-      { label: "Osijek", value: "Osijek" }
-    ];
-
     return (
-      <div className="create-profile">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Napravi svoj profil</h1>
-              <p className="lead text-center">
-                Dodaj informacije preko kojih ćeš se isticati među ostalima
-              </p>
-              <small className="d-block pb-3">* = Obavezna polja</small>
+      <div className>
+        <div className>
+          <div className>
+            <div className>
+              <h1 className>Napravite svoj profil</h1>
+
+              <small className>* = obavezna polja</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="* Profile Handle"
@@ -208,75 +216,94 @@ class CreateProfile extends Component {
                   value={this.state.handle}
                   onChange={this.onChange}
                   error={errors.handle}
-                  info="A unique handle for your profile URL. Your full name, company name, nickname"
+                  info="Jedinstveno ime za vaš profil, npr. puno ime i prezime, ime tvrtke, nadimak"
+                  selected={true}
+                  className
                 />
                 <SelectListGroup
-                  placeholder="Location"
+                  placeholder="* Lokacija"
                   name="location"
                   value={this.state.location}
                   onChange={this.onChange}
-                  options={optionsLocation}
+                  options={this.optionsLocation}
                   error={errors.location}
-                  info="Give us an idea of where you are located"
+                  info="Odaberi lokaciju održavanja repeticija"
+                  selected={true}
+                  className
                 />
                 <Select
-                  placeholder="Subjects"
+                  placeholder="* Predmeti"
                   name="subjects"
                   value={this.state.subjects}
                   onChange={this.handleChange}
-                  options={optionsSubject}
+                  options={this.optionsSubject}
                   isMulti={true}
+                  info="Odaberi level učenika za repeticije"
+                  selected={true}
+                  className
                 />
                 <Select
-                  placeholder="Levels"
+                  placeholder="* Razine"
                   name="levels"
                   value={this.state.levels}
                   onChange={this.handleLevelsChange}
-                  options={optionsLevel}
+                  options={this.optionsLevel}
                   isMulti={true}
+                  info="Odaberi level učenika za repeticije"
+                  selected={true}
+                  className
                 />
                 <TextFieldGroup
-                  placeholder="Company"
+                  placeholder="Tvrtka"
                   name="company"
                   value={this.state.company}
                   onChange={this.onChange}
                   error={errors.company}
-                  info="Could be your own company or one you work for"
+                  info="Tvrtka u čijem ste vlasništvu ili tvrtka zaposlenja"
+                  selected={true}
+                  className
                 />
                 <TextFieldGroup
-                  placeholder="price"
+                  placeholder="* Cijena"
                   name="price"
                   value={this.state.price}
                   onChange={this.onChange}
                   error={errors.price}
-                  info="Could be your own price or a company one"
+                  info="Cijena instrukcija po satu"
+                  selected={true}
+                  className
                 />
                 <TextFieldGroup
-                  placeholder="* Skills"
+                  placeholder="Vještine"
                   name="skills"
                   value={this.state.skills}
                   onChange={this.onChange}
                   error={errors.skills}
-                  info="Please use comma separated values (eg.
-                    HTML,CSS,JavaScript,PHP"
+                  info="Koristite zarez za različite vještine"
+                  selected={true}
+                  className
                 />
                 <TextFieldGroup
-                  placeholder="Github Username"
+                  placeholder="Github korisničko ime"
                   name="githubusername"
                   value={this.state.githubusername}
                   onChange={this.onChange}
                   error={errors.githubusername}
-                  info="If you want your latest repos and a Github link, include your username"
+                  info="Ako želite da je vaš Github repozitorij vidljiv"
+                  selected={true}
+                  className
                 />
                 <TextAreaFieldGroup
-                  placeholder="Short Bio"
+                  placeholder="Kratke informacije o korisniku"
                   name="bio"
                   value={this.state.bio}
                   onChange={this.onChange}
                   error={errors.bio}
-                  info="Tell us a little about yourself"
+                  info="Napišite nešto o sebi"
+                  selected={true}
+                  className
                 />
-                <div className="mb-3">
+                <div className>
                   <button
                     type="button"
                     onClick={() => {
@@ -291,11 +318,7 @@ class CreateProfile extends Component {
                   <span className="text-muted">Opcionalno</span>
                 </div>
                 {socialInputs}
-                <input
-                  type="submit"
-                  value="Submit"
-                  className="btn btn-info btn-block mt-4"
-                />
+                <input type="submit" value="Potvrdi" />
               </form>
             </div>
             <input
@@ -310,7 +333,7 @@ class CreateProfile extends Component {
                 })
               }
             >
-              Upload
+              Učitaj
             </button>
           </div>
         </div>

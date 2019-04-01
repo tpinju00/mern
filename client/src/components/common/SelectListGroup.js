@@ -1,28 +1,35 @@
 import React from "react";
-import classnames from "classnames";
 import PropTypes from "prop-types";
 import styles from "./styles.module.css";
 
-const SelectListGroup = ({ name, value, error, info, onChange, options }) => {
+const SelectListGroup = ({
+  name,
+  selected,
+  className = "",
+  value,
+  error,
+  info,
+  onChange,
+  options
+}) => {
   const selectOptions = options.map(option => (
     <option key={option.label} value={option.value}>
       {option.label}
     </option>
   ));
+  const isSelected = selected === value ? "selected" : "";
   return (
     <div className={styles.categoriesFP}>
       <select
-        className={classnames(styles.category, {
-          "is-invalid": error
-        })}
+        className={`c-fieldThree u-x1of1 ${isSelected} ${className}`}
         name={name}
         value={value}
         onChange={onChange}
       >
         {selectOptions}
       </select>
-      {info && <small className="form-text text-muted">{info}</small>}
-      {error && <div className="invalid-feedback">{error}</div>}
+      {info && <small>{info}</small>}
+      {error && <div>{error}</div>}
     </div>
   );
 };
