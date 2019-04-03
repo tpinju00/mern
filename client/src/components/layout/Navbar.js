@@ -29,10 +29,9 @@ class Navbar extends Component {
 
         <button
           onClick={this.onLogoutClick.bind(this)}
-          className={styles.NavLink}
+          name="logout"
+          className={styles.LogoutButton}
         >
-          <img src={user.picture} style={{ width: "25px" }} alt="Profile" />
-          {""}
           Odjava
         </button>
       </div>
@@ -57,7 +56,7 @@ class Navbar extends Component {
     return (
       <nav className={styles.Container}>
         <div className={styles.Container}>
-          <Link className={styles.NavLink} to="/">
+          <Link className={styles.logoButton} to="/">
             LOGO
           </Link>
 

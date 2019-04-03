@@ -60,9 +60,7 @@ class ProfileHeader extends Component {
               </a>
             )}
 
-            {isEmpty(profile.social && profile.social.facebook) ? (
-              "Korisnik nije unio facebook profil"
-            ) : (
+            {isEmpty(profile.social && profile.social.facebook) ? null : (
               <a className href={profile.social.facebook} rel="noopener">
                 <i className />
               </a>

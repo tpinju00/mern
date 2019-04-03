@@ -9,6 +9,7 @@ import SelectListGroup from "../common/SelectListGroup";
 import { createProfile } from "../../actions/profileActions";
 import axios from "axios";
 import Select from "react-select";
+import styles from "./styles.module.css";
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -90,7 +91,7 @@ class CreateProfile extends Component {
     axios
       .post("api/profile/upload", formData, config)
       .then(response => {
-        alert("The file is successfully uploaded");
+        alert("Slika je uspješno dodana!");
       })
       .catch(error => {});
   };
@@ -107,7 +108,7 @@ class CreateProfile extends Component {
       this.setState({ levels: selectedLevels });
       console.log("levels on change", this.state.levels);
     } else {
-      console.log("Prekoracili ste broj dozvoljenih razina");
+      console.log("Prekoračili ste broj dozvoljenih razina");
     }
   };
 
@@ -205,10 +206,27 @@ class CreateProfile extends Component {
       <div className>
         <div className>
           <div className>
-            <div className>
-              <h1 className>Napravite svoj profil</h1>
+            <h1 className={styles.title}>Napravite svoj profil</h1>
 
-              <small className>* = obavezna polja</small>
+            <small className={styles.requiredFields}>* = obavezna polja</small>
+            <div className={styles.allForm}>
+              <div className={styles.imageUpload}>
+                <input
+                  type="file"
+                  name="profileImage"
+                  onChange={this.fileSelectedHandler}
+                />
+                <button
+                  className={styles.uploadButton}
+                  onClick={() =>
+                    this.fileUploadHandler({
+                      profileId: profile._id
+                    })
+                  }
+                >
+                  Učitaj
+                </button>
+              </div>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="* Profile Handle"
@@ -216,10 +234,13 @@ class CreateProfile extends Component {
                   value={this.state.handle}
                   onChange={this.onChange}
                   error={errors.handle}
-                  info="Jedinstveno ime za vaš profil, npr. puno ime i prezime, ime tvrtke, nadimak"
                   selected={true}
-                  className
+                  className={styles.formGroup}
                 />
+                <p className={styles.infoBox}>
+                  Jedinstveno ime za vaš profil, npr. puno ime i prezime, ime
+                  tvrtke, nadimak
+                </p>
                 <SelectListGroup
                   placeholder="* Lokacija"
                   name="location"
@@ -227,10 +248,12 @@ class CreateProfile extends Component {
                   onChange={this.onChange}
                   options={this.optionsLocation}
                   error={errors.location}
-                  info="Odaberi lokaciju održavanja repeticija"
                   selected={true}
-                  className
+                  className={styles.formSelect}
                 />
+                <p className={styles.infoBox}>
+                  Odaberi lokaciju održavanja repeticija
+                </p>
                 <Select
                   placeholder="* Predmeti"
                   name="subjects"
@@ -238,10 +261,10 @@ class CreateProfile extends Component {
                   onChange={this.handleChange}
                   options={this.optionsSubject}
                   isMulti={true}
-                  info="Odaberi level učenika za repeticije"
-                  selected={true}
-                  className
                 />
+                <p className={styles.infoBox}>
+                  Odaberi predmet za kojeg se održavaju repeticije
+                </p>
                 <Select
                   placeholder="* Razine"
                   name="levels"
@@ -249,60 +272,66 @@ class CreateProfile extends Component {
                   onChange={this.handleLevelsChange}
                   options={this.optionsLevel}
                   isMulti={true}
-                  info="Odaberi level učenika za repeticije"
-                  selected={true}
-                  className
                 />
+                <p className={styles.infoBox}>
+                  Odaberi level učenika za repeticije
+                </p>
                 <TextFieldGroup
                   placeholder="Tvrtka"
                   name="company"
                   value={this.state.company}
                   onChange={this.onChange}
                   error={errors.company}
-                  info="Tvrtka u čijem ste vlasništvu ili tvrtka zaposlenja"
                   selected={true}
-                  className
+                  className={styles.formGroup}
                 />
+                <p className={styles.infoBox}>
+                  Tvrtka u čijem ste vlasništvu ili tvrtka zaposlenja
+                </p>
                 <TextFieldGroup
                   placeholder="* Cijena"
                   name="price"
                   value={this.state.price}
                   onChange={this.onChange}
                   error={errors.price}
-                  info="Cijena instrukcija po satu"
                   selected={true}
-                  className
+                  className={styles.formGroup}
                 />
+                <p className={styles.infoBox}>Cijena instrukcija po satu</p>
                 <TextFieldGroup
                   placeholder="Vještine"
                   name="skills"
                   value={this.state.skills}
                   onChange={this.onChange}
                   error={errors.skills}
-                  info="Koristite zarez za različite vještine"
                   selected={true}
-                  className
+                  className={styles.formGroup}
                 />
+                <p className={styles.infoBox}>
+                  Koristite zarez za različite vještine
+                </p>
                 <TextFieldGroup
                   placeholder="Github korisničko ime"
                   name="githubusername"
                   value={this.state.githubusername}
                   onChange={this.onChange}
                   error={errors.githubusername}
-                  info="Ako želite da je vaš Github repozitorij vidljiv"
                   selected={true}
-                  className
+                  className={styles.formGroup}
                 />
+                <p className={styles.infoBox}>
+                  Ako želite da je vaš Github repozitorij vidljiv
+                </p>
                 <TextAreaFieldGroup
                   placeholder="Kratke informacije o korisniku"
                   name="bio"
                   value={this.state.bio}
                   onChange={this.onChange}
                   error={errors.bio}
-                  info="Napišite nešto o sebi"
                   selected={true}
-                  className
+                  className={styles.formGroup}
                 />
+                <p className={styles.infoBox}>Napišite nešto o sebi</p>
                 <div className>
                   <button
                     type="button"
@@ -311,30 +340,20 @@ class CreateProfile extends Component {
                         displaySocialInputs: !prevState.displaySocialInputs
                       }));
                     }}
-                    className="btn btn-light"
+                    className={styles.buttonDM}
                   >
                     Dodaj linkove za društvene mreže
                   </button>
-                  <span className="text-muted">Opcionalno</span>
+                  <span>Neobavezno</span>
                 </div>
                 {socialInputs}
-                <input type="submit" value="Potvrdi" />
+                <input
+                  type="submit"
+                  value="Potvrdi"
+                  className={styles.buttonDM}
+                />
               </form>
             </div>
-            <input
-              type="file"
-              name="profileImage"
-              onChange={this.fileSelectedHandler}
-            />
-            <button
-              onClick={() =>
-                this.fileUploadHandler({
-                  profileId: profile._id
-                })
-              }
-            >
-              Učitaj
-            </button>
           </div>
         </div>
       </div>

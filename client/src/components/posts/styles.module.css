@@ -1,5 +1,5 @@
 .profile {
-  padding: 1px 1px 1px 1px;
+  padding: 1px 1px 15px 1px;
   margin: 10px 10px 10px 10px;
   position: relative;
   box-shadow: 0 1px 3px 0 rgba(63, 63, 68, 0.15),
@@ -60,6 +60,16 @@
 .rate {
   height: 40px;
   margin: 40px 4px 4px 4px;
+  align-items: flex-start;
+  text-align: center;
+  cursor: pointer;
+  padding: 0px;
+  box-sizing: unset;
+  border-width: unset;
+  border-style: none;
+  border-image: none;
+  color: transparent;
+  background-color: transparent;
 }
 .rate:not(:checked) > input {
   position: absolute;
@@ -92,8 +102,45 @@
 
 .totalNumRating {
   color: #3c5a40;
-  font-size: 28px;
+  font-size: 20px;
   white-space: nowrap;
   text-decoration: none;
-  margin-right: 20px;
+  cursor: auto;
+  padding-left: 10px;
+}
+
+.personName {
+  color: #3c5a40;
+  font-weight: bold;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.boxComment {
+  margin: 5px 5px 5px 20px;
+}
+
+.exButton {
+  color: white;
+  background-color: #3c5a40;
+  font-size: 13px;
+  transition: all 0.25s linear;
+  overflow-x: hidden;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  border: none;
+  padding: 5px;
+}
+
+.commentsButton {
+  color: #3c5a40;
+  font-size: 16px;
+  transition: all 0.25s linear;
+  overflow-x: hidden;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  border: none;
+  text-decoration: underline;
 }

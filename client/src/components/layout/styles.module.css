@@ -53,6 +53,7 @@
   flex: 1;
   background-color: white;
   padding-left: 95px;
+  margin-bottom: 5px;
 }
 
 .ListGeneral {
@@ -62,8 +63,7 @@
   padding-right: 100px;
 }
 
-.NavLink {
-  display: inline-block;
+.logoButton {
   padding: var(--header-padding, 5px) 10px;
   margin-left: 10px;
   cursor: pointer;
@@ -76,6 +76,48 @@
   transition: all 0.25s linear;
   overflow-x: hidden;
   text-decoration: none;
+}
+
+.NavLink {
+  /*display: inline-block;*/
+  padding: var(--header-padding, 5px) 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 20px;
+  font-weight: bold;
+  color: #3c5a40;
+  border-top: 3px solid transparent;
+  border-bottom: 2px solid transparent;
+  transition: all 0.25s linear;
+  overflow-x: hidden;
+  text-decoration: none;
+}
+
+.LogoutButton {
+  padding: var(--header-padding, 5px) 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 20px;
+  font-weight: bold;
+  color: #3c5a40;
+  border-top: 3px solid transparent;
+  border-bottom: 2px solid transparent;
+  transition: all 0.25s linear;
+  overflow-x: hidden;
+  text-decoration: none;
+  box-sizing: unset;
+  border-width: unset;
+  border-style: none;
+  border-image: none;
+  background-color: transparent;
+  position: absolute;
+}
+
+.LogoutButton_active,
+.LogoutButton:hover {
+  border-bottom: 2px solid #63856a;
 }
 
 .NavLink_active,

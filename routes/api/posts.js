@@ -202,30 +202,38 @@ router.post(
 // @description Remove comm from post
 // @access      Private
 router.delete(
-  "/comment/:id/:comment_id",
+  "/:comment_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     console.log("req.params", req.params);
-    Post.findById(req.params.id)
+    Post.findById(req.params.comment_id)
       .then(post => {
+        console.log("post.length", post._id);
         // Check to see if comment exists
-        if (
-          post.comments.filter(
-            comment => comment._id.toString() === req.params.comment_id
-          ).length === 0
-        ) {
+
+        let stuff = post.comments.filter(comment => {
+          return comment._id.toString() === req.params.comment_id;
+        });
+        console.log(stuff.toString().length);
+
+        if ((post._id === req.params.comment_id).length === 0) {
+          // if (
+          //   post.comments.filter(
+          //     comment => comment._id.toString() === req.params.comment_id
+          //   ).length === 0
+          // )
           return res
             .status(404)
             .json({ commentnotexists: "Comment does not exist" });
         }
 
         // Get remove index
-        const removeIndex = post.comments
+        const removeIndex = post
           .map(item => item._id.toString())
           .indexOf(req.params.comment_id);
 
         // Splice comment out of array
-        post.comments.splice(removeIndex, 1);
+        post.splice(removeIndex, 1);
 
         post.save().then(post => res.json(post));
       })

@@ -172,7 +172,7 @@ class CreateProfile extends Component {
     if (subjects.length < 9) {
       this.setState({ subjects });
     } else {
-      console.log("Prekoracili ste broj dozvoljenih kategorija");
+      console.log("Prekoračili ste broj dozvoljenih kategorija");
     }
   };
 
@@ -181,7 +181,7 @@ class CreateProfile extends Component {
       this.setState({ levels: selectedLevels });
       console.log("levels on change", this.state.levels);
     } else {
-      console.log("Prekoracili ste broj dozvoljenih razina");
+      console.log("Prekoračili ste broj dozvoljenih razina");
     }
   };
 

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { deletePost, addLike, removeLike } from "../../actions/postActions";
+import styles from "./styles.module.css";
 
 class PostItem extends Component {
   onDeleteClick(id) {
@@ -31,46 +32,30 @@ class PostItem extends Component {
     const { post, auth, showActions } = this.props;
 
     return (
-      <div className="card card-body mb-3">
-        <div className="row">
-          <div className="col-md-2">
-            <a href="profile.html">
-              <img
-                className="rounded-circle d-none d-md-block"
-                //src={post.picture}
-                alt=""
-              />
-            </a>
-            <br />
-            <p className="text-center">{post.name}</p>
-          </div>
-          <div className="col-md-10">
-            <p className="lead">{post.text}</p>
-            {showActions ? (
-              <span>
-                <button
-                  onClick={this.onUnlikeClick.bind(this, post._id)}
-                  type="button"
-                  className="btn btn-light mr-1"
-                >
-                  <i className="text-secondary fas fa-thumbs-down" />
-                </button>
-                <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
-                  Comments
-                </Link>
-                {post.user === auth.user.id ? (
-                  <button
-                    onClick={this.onDeleteClick.bind(this, post._id)}
-                    type="button"
-                    className="btn btn-danger mr-1"
-                  >
-                    <i className="fas fa-times" />
-                  </button>
-                ) : null}
-              </span>
-            ) : null}
-            <div className="handle">{post.handle}</div>
-          </div>
+      <div className={styles.boxComment}>
+        <div className>
+          {/* <a href="profile.html" /> */}
+          <br />
+          <p className={styles.personName}>{post.name}</p>
+          {/* {post.user === auth.user.id ? (
+            <button
+              onClick={this.onDeleteClick.bind(this, post._id)}
+              type="button"
+              className={styles.exButton}
+            >
+              <i className="fas fa-times" />
+            </button>
+          ) : null} */}
+        </div>
+        <div className>
+          <p className>{post.text}</p>
+          {showActions ? (
+            <span>
+              <Link to={`/post/${post._id}`} className={styles.commentsButton}>
+                Komentari
+              </Link>
+            </span>
+          ) : null}
         </div>
       </div>
     );
